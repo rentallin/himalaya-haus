@@ -4,8 +4,11 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import alpinejs from '@astrojs/alpinejs';
 
+const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+
 export default defineConfig({
-  site: 'https://www.himalayahaus.de',
+  site: isGitHubPages ? 'https://rentallin.github.io' : 'https://www.himalayahaus.de',
+  base: isGitHubPages ? '/himalaya-haus' : undefined,
   trailingSlash: 'always',
   output: 'static',
   integrations: [
