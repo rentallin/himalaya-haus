@@ -1,0 +1,109 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+---
+
+<BaseLayout
+  title="Über uns — Himalaya-Haus e.V."
+  description="Himalaya-Haus e.V. wurde 2017 in Frankfurt von Lama Konchok Samten und Oliver gegründet. Gemeinnützig, transparent, direkt: Hilfe für Kinder in Ladakh."
+>
+  <Hero variant="compact" title="Wer hinter Himalaya-Haus e.V. steht"
+    subtitle="Gegründet 2017 · Frankfurt am Main" />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Über uns</span>
+      </nav>
+
+      <div class="max-w-prose mx-auto space-y-10">
+        <div>
+          <h2 class="font-serif text-h2 text-brand-text mb-5">Unsere Geschichte</h2>
+          <div class="prose-himalaya space-y-4">
+            <p>
+              Himalaya-Haus e.V. wurde 2017 in Frankfurt am Main gegründet — von einem buddhistischen Mönch aus Ladakh,
+              einem Unternehmer aus dem Schwarzwald und einer Unternehmerin, die beide die Verbindung seit Jahren begleitet.
+              Der Verein hat keine Verwaltungs-Ambitionen. Er hat drei laufende Projekte, einen klaren Fokus und eine Haltung:
+              Hilfe funktioniert nur, wenn man versteht, wohin und zu wem sie geht.
+            </p>
+            <p>
+              Die Idee entstand nicht am Schreibtisch. Lama Konchok Samten hatte über Jahre Kontakt zu Menschen in Deutschland,
+              die seine Arbeit in Ladakh unterstützen wollten — konkret, verlässlich, ohne großes Zwischenwerk.
+              Oliver und Clarissa, die ihn seit Jahren kannten, schufen die rechtliche und organisatorische Struktur dafür.
+              Der Verein ist das Ergebnis einer Freundschaft — und einer gemeinsamen Überzeugung, dass konkrete Hilfe
+              keine Komplexität braucht, die ihr im Weg steht.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-h2 text-brand-text mb-5">Unser Team</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                name: 'Lama Konchok Samten',
+                rolle: 'Mitgründer & Vorstand',
+                beschreibung: 'Buddhistischer Mönch der Drikung-Kagyü-Tradition. Geboren 1981 in Ladakh. Herzstück des Vereins und Verbindung zu allen Projekten vor Ort.',
+                href: '/ueber-uns/lama-konchok/',
+              },
+              {
+                name: 'Oliver',
+                rolle: 'Mitgründer & Vorstand',
+                beschreibung: 'Unternehmer aus dem Schwarzwald. Seit über 25 Jahren in Immobilien und Finanzen. Bringt praktisches Organisations- und Managementwissen ein.',
+                href: undefined,
+              },
+              {
+                name: 'Clarissa',
+                rolle: 'Unterstützer-Vorstand',
+                beschreibung: 'Unternehmerin. Unterstützt den Verein seit seiner Gründung. Koordiniert Teile der Kommunikation und Öffentlichkeitsarbeit.',
+                href: undefined,
+              },
+            ].map(person => (
+              <div class="card p-6">
+                <div class="w-14 h-14 rounded-full bg-gradient-cta flex items-center justify-center mb-4">
+                  <span class="font-serif text-white text-h3">
+                    {person.name.split(' ').map(w => w[0]).join('').slice(0, 2)}
+                  </span>
+                </div>
+                <h3 class="font-serif text-h4 text-brand-text mb-0.5">{person.name}</h3>
+                <p class="text-caption text-brand-ocker font-semibold mb-3">{person.rolle}</p>
+                <p class="text-small text-brand-text/70 leading-relaxed mb-4">{person.beschreibung}</p>
+                {person.href && (
+                  <a href={person.href} class="btn-ghost text-small">Mehr erfahren →</a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-h2 text-brand-text mb-5">Transparenz & Jahresberichte</h2>
+          <p class="text-body text-brand-text/70 mb-6 leading-relaxed">
+            Unsere Jahresberichte sind öffentlich zugänglich. Wir schlüsseln auf, wohin die Spendenmittel geflossen sind —
+            nach Projekt, nach Verwendung. Wer Fragen hat, kann Lama Samten oder Oliver direkt erreichen.
+            Wir sind kein anonymer Apparat.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <div class="p-4 rounded-card bg-white shadow-card border border-brand-creme-dark text-small text-brand-text/60 italic">
+              Jahresbericht 2024 — wird demnächst veröffentlicht.
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-card bg-brand-creme-dark">
+          <h3 class="font-serif text-h4 text-brand-text mb-2">Gemeinnützigkeit</h3>
+          <p class="text-body text-brand-text/70">
+            Himalaya-Haus e.V. ist als gemeinnützig anerkannt. Spenden sind steuerlich absetzbar.
+            Zuwendungsbestätigungen (Spendenquittungen) werden auf Anfrage ausgestellt, ab einem Spendenbetrag
+            von 50€ automatisch.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NewsletterFormular />
+</BaseLayout>

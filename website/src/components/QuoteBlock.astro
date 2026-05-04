@@ -1,0 +1,40 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  role?: string;
+  variant?: 'klein' | 'gross';
+}
+
+const { quote, author, role, variant = 'klein' } = Astro.props;
+---
+
+{variant === 'gross' ? (
+  <section class="section-padding bg-brand-text relative overflow-hidden">
+    <!-- Decorative quote mark -->
+    <div class="absolute top-8 left-8 text-white/5 font-serif leading-none select-none"
+         style="font-size: 20rem; line-height: 1;">"</div>
+    <div class="container-content relative z-10 max-w-3xl mx-auto text-center">
+      <blockquote>
+        <p class="font-serif text-h2 text-white leading-relaxed italic mb-8">
+          "{quote}"
+        </p>
+        <footer>
+          <div class="w-12 h-0.5 bg-brand-ocker mx-auto mb-4" />
+          <cite class="not-italic">
+            <div class="font-semibold text-white text-body-lg">{author}</div>
+            {role && <div class="text-white/60 text-small mt-1">{role}</div>}
+          </cite>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+) : (
+  <blockquote class="border-l-4 border-brand-ocker pl-6 py-2 my-6">
+    <p class="font-serif italic text-h4 text-brand-text leading-relaxed mb-3">"{quote}"</p>
+    <footer class="text-small text-brand-text/60">
+      — <cite class="not-italic font-semibold">{author}</cite>
+      {role && <span class="text-brand-text/40">, {role}</span>}
+    </footer>
+  </blockquote>
+)}

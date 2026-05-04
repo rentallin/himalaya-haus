@@ -1,0 +1,88 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "http://himalayahaus.de/*"
+  to   = "https://www.himalayahaus.de/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://himalayahaus.de/*"
+  to   = "https://www.himalayahaus.de/:splat"
+  status = 301
+  force = true
+
+# Alte Joomla-URL-Redirects
+[[redirects]]
+  from = "/de/"
+  to   = "/"
+  status = 301
+
+[[redirects]]
+  from = "/de/ueber-uns"
+  to   = "/ueber-uns/"
+  status = 301
+
+[[redirects]]
+  from = "/de/projekte"
+  to   = "/projekte/"
+  status = 301
+
+[[redirects]]
+  from = "/de/projekte/nalanda-schule-waisenhaus"
+  to   = "/projekte/nalanda-schule/"
+  status = 301
+
+[[redirects]]
+  from = "/de/projekte/patenschaft"
+  to   = "/unterstuetzen/patenschaft/"
+  status = 301
+
+[[redirects]]
+  from = "/de/projekte/medical-camp"
+  to   = "/projekte/medical-camp/"
+  status = 301
+
+[[redirects]]
+  from = "/de/spenden"
+  to   = "/unterstuetzen/spenden/"
+  status = 301
+
+[[redirects]]
+  from = "/de/kontakt"
+  to   = "/kontakt/"
+  status = 301
+
+[[redirects]]
+  from = "/de/news"
+  to   = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to   = "/404/index.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

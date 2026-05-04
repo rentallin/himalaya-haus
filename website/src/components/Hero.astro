@@ -1,0 +1,98 @@
+---
+interface Props {
+  variant?: 'fullscreen' | 'compact';
+  title: string;
+  subtitle?: string;
+  description?: string;
+  ctaPrimary?: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
+  bgImage?: string;
+  bgColor?: string;
+  badge?: string;
+}
+
+const {
+  variant = 'compact',
+  title,
+  subtitle,
+  description,
+  ctaPrimary,
+  ctaSecondary,
+  bgImage,
+  bgColor = 'brand-erde',
+  badge,
+} = Astro.props;
+---
+
+<section
+  class={`hero-section relative overflow-hidden ${variant === 'fullscreen' ? 'min-h-screen flex items-center' : 'py-24 md:py-32'}`}
+>
+  <!-- Background -->
+  {bgImage ? (
+    <div class="absolute inset-0">
+      <img
+        src={bgImage}
+        alt=""
+        class="w-full h-full object-cover"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-gradient-hero" />
+    </div>
+  ) : (
+    <div class="absolute inset-0 bg-gradient-cta opacity-90" />
+  )}
+
+  <!-- Decorative mountain silhouette -->
+  <div class="absolute bottom-0 left-0 right-0 opacity-10">
+    <svg viewBox="0 0 1440 200" class="w-full" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,200 L0,100 L120,40 L240,80 L360,20 L480,70 L600,10 L720,50 L840,0 L960,45 L1080,25 L1200,65 L1320,30 L1440,60 L1440,200 Z"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class={`max-w-3xl ${variant === 'fullscreen' ? 'py-32' : ''}`}>
+      {badge && (
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-small font-semibold mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-ocker-light animate-pulse" />
+          {badge}
+        </div>
+      )}
+
+      {subtitle && (
+        <p class="text-brand-ocker-light font-semibold text-body-lg mb-3 tracking-wide uppercase text-small">
+          {subtitle}
+        </p>
+      )}
+
+      <h1 class={`font-serif text-white mb-6 ${variant === 'fullscreen' ? 'text-display' : 'text-h1'}`}>
+        {title}
+      </h1>
+
+      {description && (
+        <p class="text-white/85 text-body-lg mb-8 max-w-2xl leading-relaxed">
+          {description}
+        </p>
+      )}
+
+      {(ctaPrimary || ctaSecondary) && (
+        <div class="flex flex-wrap gap-4">
+          {ctaPrimary && (
+            <a href={ctaPrimary.href} class="btn-primary">
+              {ctaPrimary.label}
+            </a>
+          )}
+          {ctaSecondary && (
+            <a
+              href={ctaSecondary.href}
+              class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-white/60 text-white font-semibold text-body transition-all duration-200 hover:border-white hover:bg-white/10 backdrop-blur-sm"
+            >
+              {ctaSecondary.label}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

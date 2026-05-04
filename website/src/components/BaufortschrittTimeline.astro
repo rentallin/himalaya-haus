@@ -1,0 +1,132 @@
+---
+interface Phase {
+  nummer: number;
+  titel: string;
+  beschreibung: string;
+  status: 'abgeschlossen' | 'laufend' | 'geplant';
+  datum?: string;
+}
+
+interface Props {
+  compact?: boolean;
+  phasen?: Phase[];
+}
+
+const {
+  compact = false,
+  phasen = [
+    {
+      nummer: 1,
+      titel: 'Grundstück & Planung',
+      beschreibung: 'Das Dorf Saboo stellt das Grundstück bereit. Architektonische Planung nach Passivhaus-Prinzip mit lokalen Experten.',
+      status: 'abgeschlossen',
+      datum: '2017–2018',
+    },
+    {
+      nummer: 2,
+      titel: 'Fundament & Erdarbeiten',
+      beschreibung: 'Fundamentlegung und erste Erdarbeiten. Lokale Materialien: Stein, Lehm, Holz aus der Region.',
+      status: 'abgeschlossen',
+      datum: '2019–2020',
+    },
+    {
+      nummer: 3,
+      titel: 'Rohbau Erdgeschoss',
+      beschreibung: 'Errichtung des Erdgeschosses mit Klassenräumen und Gemeinschaftsbereichen.',
+      status: 'laufend',
+      datum: 'Laufend',
+    },
+    {
+      nummer: 4,
+      titel: 'Internats-Trakt & Fertigstellung',
+      beschreibung: 'Schlafräume, Küche, Bibliothek. Kapazität für 200 Kinder. Geplante Übergabe an Schulbetrieb.',
+      status: 'geplant',
+      datum: 'Geplant',
+    },
+  ],
+} = Astro.props;
+
+const statusConfig = {
+  abgeschlossen: { label: 'Abgeschlossen', color: 'bg-green-500', textColor: 'text-green-700', bgLight: 'bg-green-50' },
+  laufend:       { label: 'Laufend',        color: 'bg-brand-ocker animate-pulse', textColor: 'text-brand-ocker', bgLight: 'bg-brand-ocker/10' },
+  geplant:       { label: 'Geplant',        color: 'bg-gray-300', textColor: 'text-gray-500', bgLight: 'bg-gray-50' },
+};
+---
+
+{compact ? (
+  <!-- Compact teaser version -->
+  <section class="section-padding-sm bg-white">
+    <div class="container-content">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="font-serif text-h2 text-brand-text">Baufortschritt Nalanda Schule</h2>
+        <a href="/projekte/nalanda-schule/" class="btn-ghost hidden sm:flex">Alle Details →</a>
+      </div>
+      <div class="flex gap-0 overflow-x-auto pb-2">
+        {phasen.map((phase, i) => {
+          const s = statusConfig[phase.status];
+          return (
+            <div class="flex-1 min-w-0 relative">
+              <!-- Connector line -->
+              {i < phasen.length - 1 && (
+                <div class={`absolute top-4 left-1/2 right-0 h-0.5 ${phase.status === 'abgeschlossen' ? 'bg-green-300' : 'bg-gray-200'}`} />
+              )}
+              <div class="flex flex-col items-center px-2">
+                <div class={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center text-white text-caption font-bold mb-3 ${s.color}`}>
+                  {phase.status === 'abgeschlossen' ? '✓' : phase.nummer}
+                </div>
+                <div class="text-center">
+                  <div class="text-caption font-semibold text-brand-text">{phase.titel}</div>
+                  <div class={`text-caption font-semibold mt-0.5 ${s.textColor}`}>{phase.datum}</div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div class="mt-6 text-center sm:hidden">
+        <a href="/projekte/nalanda-schule/" class="btn-ghost">Alle Details →</a>
+      </div>
+    </div>
+  </section>
+) : (
+  <!-- Full version -->
+  <section class="section-padding">
+    <div class="container-content">
+      <div class="space-y-6">
+        {phasen.map((phase, i) => {
+          const s = statusConfig[phase.status];
+          return (
+            <div class="flex gap-6">
+              <!-- Timeline indicator -->
+              <div class="flex flex-col items-center flex-shrink-0">
+                <div class={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${s.color}`}>
+                  {phase.status === 'abgeschlossen' ? (
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : phase.nummer}
+                </div>
+                {i < phasen.length - 1 && (
+                  <div class={`flex-1 w-0.5 mt-2 min-h-8 ${phase.status === 'abgeschlossen' ? 'bg-green-300' : 'bg-gray-200'}`} />
+                )}
+              </div>
+              <!-- Content -->
+              <div class={`flex-1 pb-6 ${i === phasen.length - 1 ? '' : ''}`}>
+                <div class="flex flex-wrap items-center gap-3 mb-2">
+                  <h3 class="font-serif text-h4 text-brand-text">Phase {phase.nummer}: {phase.titel}</h3>
+                  <span class={`text-caption px-2.5 py-0.5 rounded-full font-semibold ${s.bgLight} ${s.textColor}`}>
+                    {s.label}
+                  </span>
+                  {phase.datum && (
+                    <span class="text-caption text-brand-text/50">{phase.datum}</span>
+                  )}
+                </div>
+                <p class="text-body text-brand-text/70 leading-relaxed">{phase.beschreibung}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+)}

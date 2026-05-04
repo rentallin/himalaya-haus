@@ -1,0 +1,154 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import QuoteBlock from '@/components/QuoteBlock.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import SpendenBox from '@/components/SpendenBox.astro';
+---
+
+<BaseLayout
+  title="Lama Konchok Samten — zwischen Lamayuru und Frankfurt"
+  description="Lama Konchok Samten wurde 1981 in Ladakh geboren, wuchs im Lamayuru-Kloster auf und lebt heute die Hälfte des Jahres in Frankfurt. Mitgründer und Herzstück von Himalaya-Haus e.V."
+>
+  <Hero
+    variant="compact"
+    title="Lama Konchok Samten"
+    subtitle="Mitgründer · Drikung-Kagyü-Mönch"
+    description="Zwischen Lamayuru und Frankfurt. Zwischen zwei Welten, die er beide versteht."
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <!-- Breadcrumb -->
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <a href="/ueber-uns/" class="hover:text-brand-ocker">Über uns</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Lama Konchok Samten</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-8">
+          <div>
+            <h2 class="font-serif text-h2 text-brand-text mb-5">Eine Biografie, die zwei Welten verbindet</h2>
+            <div class="prose-himalaya space-y-4">
+              <p>
+                1981 geboren in Tingmosgang, einem kleinen Dorf im Indus-Tal Ladakhs. Aufgewachsen im Lamayuru-Kloster,
+                einem der ältesten und bekanntesten Klöster der Region. Ordinierter Mönch der
+                Drikung-Kagyü-Schule des tibetischen Buddhismus. Und seit mehreren Jahren: ein Mensch,
+                der jedes Jahr mehrere Monate in Frankfurt lebt, fließend Deutsch spricht und
+                Sandmandalas in deutschen Stadthallen legt.
+              </p>
+              <p>
+                Diese Biografie ist kein Widerspruch in sich. Sie ist der Kern von dem,
+                was Himalaya-Haus e.V. möglich macht.
+              </p>
+            </div>
+          </div>
+
+          <QuoteBlock
+            quote="Ich bin in Ladakh aufgewachsen und kenne jeden Stein, jede Familie, jede Not dort. Und ich lebe in Frankfurt und verstehe, wie Menschen in Deutschland denken. Diese Verbindung ist meine Aufgabe."
+            author="Lama Konchok Samten"
+            role="Mitgründer Himalaya-Haus e.V."
+          />
+
+          <div>
+            <h3 class="font-serif text-h3 text-brand-text mb-4">Warum er der Unterschied ist</h3>
+            <div class="prose-himalaya space-y-4">
+              <p>
+                Die meisten Entwicklungsprojekte in Regionen wie Ladakh scheitern nicht am Geld.
+                Sie scheitern am Verstehen. An falschen Annahmen. An Bauweisen, die das Klima ignorieren.
+                An Strukturen, die lokale Würde missachten.
+              </p>
+              <p>
+                Lama Samten kennt die sozialen Codes, die familiären Netzwerke, die saisonalen Realitäten.
+                Er weiß, welche Baumaterialien lokal vorhanden sind, welche Familien in welchen Dörfern
+                Unterstützung brauchen, und wie man mit Klostervorstehern spricht. Gleichzeitig versteht er,
+                wie ein gemeinnütziger Verein in Deutschland funktioniert, wie Spendengelder rechtssicher
+                verwendet werden und wie man Menschen in Frankfurt erklärt, was in Saboo gebaut wird.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-serif text-h3 text-brand-text mb-4">Die Mandala-Tourneen</h3>
+            <div class="prose-himalaya space-y-4">
+              <p>
+                Mehrmals im Jahr reist Lama Samten durch Deutschland und legt öffentlich Sandmandalas —
+                aufwendige rituelle Kunstwerke aus gefärbtem Sand, die über mehrere Tage entstehen
+                und dann wieder aufgelöst werden. Diese Zeremonien sind keine Vorführung. Sie sind eine
+                Einladung: zur Begegnung mit buddhistischer Praxis, mit Ladakh, mit der Frage,
+                was Vergänglichkeit bedeutet.
+              </p>
+              <p>
+                Sie sind auch eine der wichtigsten Verbindungen zwischen der deutschen Unterstützergemeinde
+                und der Arbeit vor Ort.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-serif text-h3 text-brand-text mb-4">Die Drikung-Kagyü-Tradition</h3>
+            <div
+              x-data="{ open: false }"
+              class="border border-brand-creme-dark rounded-card overflow-hidden"
+            >
+              <button
+                @click="open = !open"
+                class="w-full flex items-center justify-between p-5 text-left hover:bg-brand-creme-dark transition-colors"
+              >
+                <span class="font-semibold text-brand-text">Was ist die Drikung-Kagyü-Schule?</span>
+                <svg class="w-5 h-5 text-brand-ocker transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div x-show="open" x-transition class="px-5 pb-5">
+                <p class="text-body text-brand-text/70 leading-relaxed">
+                  Die Drikung-Kagyü-Schule ist eine der ältesten Schulen des tibetischen Buddhismus, gegründet im
+                  12. Jahrhundert. Sie ist bekannt für ihre Betonung von Meditation, Mitgefühl und praktischem
+                  Engagement in der Welt. Das Lamayuru-Kloster in Ladakh, wo Lama Samten aufwuchs, ist eines
+                  der bedeutendsten Klöster dieser Tradition.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+          <!-- Portrait Placeholder -->
+          <div class="aspect-square rounded-card overflow-hidden bg-gradient-cta flex items-center justify-center">
+            <span class="font-serif text-white opacity-10" style="font-size: 8rem; line-height: 1;">LS</span>
+          </div>
+
+          <!-- Key Facts -->
+          <div class="p-5 rounded-card bg-white shadow-card">
+            <h4 class="font-serif text-h4 text-brand-text mb-4">Auf einen Blick</h4>
+            <dl class="space-y-3 text-small">
+              {[
+                { dt: 'Geboren', dd: '1981, Tingmosgang, Ladakh' },
+                { dt: 'Tradition', dd: 'Drikung-Kagyü (Tibetischer Buddhismus)' },
+                { dt: 'Ausbildung', dd: 'Lamayuru-Kloster, Ladakh' },
+                { dt: 'Lebt in', dd: 'Frankfurt am Main & Leh, Ladakh' },
+                { dt: 'Sprachen', dd: 'Deutsch, Tibetisch, Hindi, Englisch' },
+                { dt: 'Vereinsrolle', dd: 'Mitgründer & Vorstandsmitglied' },
+              ].map(({ dt, dd }) => (
+                <div>
+                  <dt class="text-brand-text/50 font-medium">{dt}</dt>
+                  <dd class="text-brand-text font-semibold">{dd}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <!-- Spenden Sidebar -->
+          <SpendenBox variant="sidebar" title="Lamas Werk unterstützen" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NewsletterFormular title="Direkt von Lama Samten hören" description="Im Newsletter schreibt er persönlich — aus Frankfurt, aus Leh, aus Saboo. Ca. viermal im Jahr." />
+</BaseLayout>

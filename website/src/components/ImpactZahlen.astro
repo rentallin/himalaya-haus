@@ -1,0 +1,73 @@
+---
+interface Stat {
+  zahl: string;
+  einheit?: string;
+  kontext: string;
+}
+
+interface Props {
+  title?: string;
+  stats?: Stat[];
+  variant?: 'hell' | 'dunkel';
+}
+
+const {
+  title = 'Was bisher entstanden ist',
+  variant = 'hell',
+  stats = [
+    {
+      zahl: '200',
+      kontext: 'Kinder finden in der Nalanda Schule Platz — Waisen und Kinder aus abgelegenen Dörfern, die sonst keinen Zugang zu Bildung hätten.',
+    },
+    {
+      zahl: '1.000+',
+      kontext: 'Menschen in Dörfern ohne nächste Arztpraxis wurden in unseren jährlichen Medical Camps behandelt. Kostenlos. Von Ärzten aus Deutschland.',
+    },
+    {
+      zahl: '2017',
+      kontext: 'Gegründet. Kein Apparat, kein Overhead-Fetisch. Direkte Verbindung, direkte Wirkung vor Ort.',
+    },
+    {
+      zahl: '2019',
+      kontext: 'Begann der Bau in Saboo bei Leh. Ökologisch. Mit lokalen Materialien. Nach Passivhaus-Prinzip — damit die Schule Jahrzehnte hält.',
+    },
+  ],
+} = Astro.props;
+
+const isDark = variant === 'dunkel';
+---
+
+<section class={`section-padding ${isDark ? 'bg-brand-text' : 'bg-brand-creme-dark'}`}>
+  <div class="container-content">
+    {title && (
+      <h2 class={`font-serif text-h2 mb-12 text-center ${isDark ? 'text-white' : 'text-brand-text'}`}>
+        {title}
+      </h2>
+    )}
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {stats.map((stat, i) => (
+        <div
+          class={`relative p-6 rounded-card transition-transform duration-200 hover:-translate-y-1 ${
+            isDark
+              ? 'bg-white/5 border border-white/10 hover:border-brand-ocker/40'
+              : 'bg-white shadow-card hover:shadow-card-lg'
+          }`}
+        >
+          <!-- Accent line -->
+          <div class="absolute top-0 left-6 right-6 h-0.5 rounded-full bg-gradient-cta" />
+
+          <div class={`font-serif mb-3 ${isDark ? 'text-brand-ocker-light' : 'text-brand-ocker'}`}
+               style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em;">
+            {stat.zahl}
+            {stat.einheit && <span class="text-h3 ml-1">{stat.einheit}</span>}
+          </div>
+
+          <p class={`text-small leading-relaxed ${isDark ? 'text-white/70' : 'text-brand-text/70'}`}>
+            {stat.kontext}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,168 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import ImpactZahlen from '@/components/ImpactZahlen.astro';
+import ProjektKarte from '@/components/ProjektKarte.astro';
+import SpendenBox from '@/components/SpendenBox.astro';
+import BaufortschrittTimeline from '@/components/BaufortschrittTimeline.astro';
+import WirkungsRechner from '@/components/WirkungsRechner.astro';
+import QuoteBlock from '@/components/QuoteBlock.astro';
+import BlogPostKarte from '@/components/BlogPostKarte.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { getCollection } from 'astro:content';
+
+const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="Hilfsprojekte in Ladakh — Nalanda Schule, Patenschaft, Medical Camp"
+  description="Himalaya-Haus e.V. unterstützt Kinder in Ladakh durch den Bau der Nalanda Schule, Kinderpatenschaften und jährliche Medical Camps. Gegründet von Lama Konchok Samten und Oliver."
+>
+  <!-- 1. Hero -->
+  <Hero
+    variant="fullscreen"
+    title="Ein Mönch aus Ladakh. Ein Verein aus Frankfurt. Eine Schule, die gerade gebaut wird."
+    description="Himalaya-Haus e.V. verbindet zwei Welten — nicht symbolisch, sondern praktisch. Lama Konchok Samten lebt die Hälfte des Jahres in Frankfurt, die andere in Ladakh. Er kennt beide Seiten. Deshalb weiß er, was wirklich gebraucht wird."
+    ctaPrimary={{ label: 'Jetzt unterstützen', href: '/unterstuetzen/spenden/' }}
+    ctaSecondary={{ label: 'Unsere Projekte', href: '/projekte/' }}
+    badge="Bau in Saboo läuft — Phase 3 aktiv"
+  />
+
+  <!-- 2. Impact Zahlen -->
+  <ImpactZahlen />
+
+  <!-- 3. Drei Projekte -->
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <div class="text-center mb-12">
+        <h2 class="font-serif text-h2 text-brand-text mb-3">Drei Wege, wie Ihre Unterstützung wirkt</h2>
+        <p class="text-body-lg text-brand-text/70 max-w-2xl mx-auto">
+          Jedes Projekt ist konkret, nachverfolgbar und direkt von Lama Samten vor Ort begleitet.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <ProjektKarte
+          title="Nalanda Schule & Waisenhaus"
+          description="In Saboo bei Leh entsteht ein Internat für 200 Kinder — Waisen und Kinder aus Dörfern ohne Schulzugang. Ökologisch gebaut. Gerade im Bau."
+          href="/projekte/nalanda-schule/"
+          status="im-bau"
+          label="Hauptprojekt · Saboo, Ladakh"
+        />
+        <ProjektKarte
+          title="Kinderpatenschaft"
+          description="Eine monatliche Patenschaft unterstützt ein konkretes Kind — in einer Klosterschule, einem Waisenhaus oder einer Dorfgemeinschaft."
+          href="/projekte/patenschaft/"
+          status="aktiv"
+          label="Laufend · Direkthilfe"
+        />
+        <ProjektKarte
+          title="Medical Camp"
+          description="Einmal im Jahr reisen Ärzte aus Deutschland nach Ladakh. Über 1.000 Patienten behandelt. Kostenlos. In Dörfern ohne nächste Arztpraxis."
+          href="/projekte/medical-camp/"
+          status="aktiv"
+          label="Jährlich · Mobile Versorgung"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Lama Samten Intro -->
+  <section class="section-padding bg-white">
+    <div class="container-content">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-caption text-brand-ocker font-semibold uppercase tracking-wider mb-3">Warum dieser Verein anders funktioniert</p>
+          <h2 class="font-serif text-h2 text-brand-text mb-5">
+            Echte Verbindung. Konkrete Wirkung.
+          </h2>
+          <p class="text-body-lg text-brand-text/75 leading-relaxed mb-5">
+            Die meisten Hilfsorganisationen kennen die Orte, in denen sie arbeiten, aus der Distanz.
+            Himalaya-Haus e.V. hat einen anderen Ausgangspunkt.
+          </p>
+          <p class="text-body text-brand-text/70 leading-relaxed mb-5">
+            Lama Konchok Samten wurde 1981 in Tingmosgang, Ladakh, geboren. Er wuchs im Lamayuru-Kloster auf,
+            wurde buddhistischer Mönch der Drikung-Kagyü-Tradition — und lebt heute die Hälfte des Jahres in Frankfurt.
+            Er spricht fließend Deutsch. Er kennt die Bürokratie des deutschen Vereinsrechts ebenso wie die sozialen
+            Strukturen in abgelegenen Dörfern Ladakhs.
+          </p>
+          <p class="text-body text-brand-text/70 leading-relaxed mb-8">
+            Diese Verbindung ist kein Zufall. Sie ist der Grund, warum die Projekte von Himalaya-Haus e.V. funktionieren.
+          </p>
+          <a href="/ueber-uns/lama-konchok/" class="btn-primary">
+            Lama Samten kennenlernen
+          </a>
+        </div>
+
+        <!-- Portrait Placeholder -->
+        <div class="relative">
+          <div class="aspect-[4/5] rounded-card overflow-hidden bg-gradient-cta flex items-center justify-center relative">
+            <span class="font-serif text-white opacity-10" style="font-size: 15rem; line-height: 1;">LS</span>
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="bg-white/10 backdrop-blur-sm rounded-card p-4 w-full">
+                <p class="text-white font-serif text-h4">Lama Konchok Samten</p>
+                <p class="text-white/70 text-small">Mitgründer · Drikung-Kagyü-Mönch · Frankfurt & Ladakh</p>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative accent -->
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-brand-ocker/20 -z-10" />
+          <div class="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-brand-blau/20 -z-10" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Baufortschritt Teaser -->
+  <BaufortschrittTimeline compact={true} />
+
+  <!-- 6. Wirkungsrechner -->
+  <WirkungsRechner />
+
+  <!-- 7. SpendenBox -->
+  <SpendenBox variant="fullwidth" />
+
+  <!-- 8. Quote -->
+  <QuoteBlock
+    variant="gross"
+    quote="Wir helfen nicht von oben herab. Wir bauen gemeinsam — weil ich weiß, was gebraucht wird, und weil Menschen in Deutschland bereit sind zu helfen, wenn sie verstehen, wohin ihre Hilfe geht."
+    author="Lama Konchok Samten"
+    role="Mitgründer Himalaya-Haus e.V."
+  />
+
+  <!-- 9. Blog Teaser -->
+  {latestPosts.length > 0 && (
+    <section class="section-padding bg-brand-creme">
+      <div class="container-content">
+        <div class="flex items-center justify-between mb-10">
+          <div>
+            <h2 class="font-serif text-h2 text-brand-text">Aus Saboo und Frankfurt</h2>
+            <p class="text-body text-brand-text/60 mt-1">Berichte, die ankommen.</p>
+          </div>
+          <a href="/blog/" class="btn-ghost hidden sm:flex">Alle Artikel →</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {latestPosts.map(post => (
+            <BlogPostKarte
+              title={post.data.title}
+              description={post.data.description}
+              href={`/blog/${post.slug}/`}
+              pubDate={post.data.pubDate}
+              author={post.data.author}
+              category={post.data.category}
+              heroImage={post.data.heroImage}
+              heroImageAlt={post.data.heroImageAlt}
+            />
+          ))}
+        </div>
+        <div class="text-center mt-8 sm:hidden">
+          <a href="/blog/" class="btn-ghost">Alle Artikel →</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 10. Newsletter -->
+  <NewsletterFormular />
+</BaseLayout>

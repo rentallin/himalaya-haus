@@ -1,0 +1,79 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'Was bewirkt Ihre Unterstützung?' } = Astro.props;
+
+const stripeLinks = {
+  spende25:    import.meta.env.PUBLIC_STRIPE_LINK_SPENDE_25   || '/unterstuetzen/spenden/',
+  spende50:    import.meta.env.PUBLIC_STRIPE_LINK_SPENDE_50   || '/unterstuetzen/spenden/',
+  spende100:   import.meta.env.PUBLIC_STRIPE_LINK_SPENDE_100  || '/unterstuetzen/spenden/',
+  dauerspende: import.meta.env.PUBLIC_STRIPE_LINK_DAUERSPENDE || '/unterstuetzen/spenden/',
+};
+
+const alpineData = JSON.stringify({
+  selected: 'monat',
+  options: {
+    '25':    { label: '25 €',         icon: '📚', text: 'finanziert Schulmaterial für ein Kind für einen Monat — Hefte, Stifte, Bücher.',           link: stripeLinks.spende25 },
+    '50':    { label: '50 €',         icon: '🏥', text: 'deckt die medizinische Behandlung von zwei Menschen im Medical Camp.',                      link: stripeLinks.spende50 },
+    '100':   { label: '100 €',        icon: '🧱', text: 'finanziert lokale Baumaterialien für einen Quadratmeter Schulgebäude in Saboo.',            link: stripeLinks.spende100 },
+    'monat': { label: '35 € / Monat', icon: '👧', text: 'ermöglicht eine vollständige Kinderpatenschaft — Schule, Unterkunft, Mahlzeiten, Kleidung.', link: stripeLinks.dauerspende },
+  },
+});
+---
+
+<section class="section-padding bg-brand-creme-dark">
+  <div class="container-content">
+    <h2 class="font-serif text-h2 text-brand-text text-center mb-3">{title}</h2>
+    <p class="text-body text-brand-text/70 text-center mb-10 max-w-xl mx-auto">
+      Wählen Sie einen Betrag und sehen Sie, was damit konkret entsteht.
+    </p>
+
+    <div
+      x-data={alpineData}
+      class="max-w-2xl mx-auto"
+    >
+      <!-- Amount selector -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        {[
+          { key: '25',    label: '25 €',         sub: 'einmalig' },
+          { key: '50',    label: '50 €',         sub: 'einmalig' },
+          { key: '100',   label: '100 €',        sub: 'einmalig' },
+          { key: 'monat', label: '35 € / Monat', sub: 'Patenschaft' },
+        ].map(({ key, label, sub }) => (
+          <button
+            @click={`selected = '${key}'`}
+            :class={`selected === '${key}' ? 'bg-gradient-cta text-white shadow-btn scale-105' : 'bg-white text-brand-text hover:bg-brand-creme-dark'`}
+            class="flex flex-col items-center py-4 px-3 rounded-card border-2 border-transparent transition-all duration-200 cursor-pointer"
+            :aria-pressed={`selected === '${key}'`}
+          >
+            <span class="font-serif font-semibold text-h4">{label}</span>
+            <span class="text-caption opacity-70">{sub}</span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Impact display -->
+      <div class="p-8 rounded-card bg-white shadow-card-lg text-center">
+        <div x-text="options[selected].icon" class="text-5xl mb-4" />
+        <p class="text-body-lg text-brand-text leading-relaxed mb-2">
+          <strong x-text="options[selected].label" class="text-brand-ocker" />
+          {' '}
+          <span x-text="options[selected].text" />
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-6">
+        <a
+          :href="options[selected].link"
+          class="btn-primary"
+          x-text="'Jetzt ' + options[selected].label + ' spenden'"
+        />
+        <p class="text-caption text-brand-text/50 mt-3">
+          Sichere Zahlung via Stripe · Steuerlich absetzbar
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

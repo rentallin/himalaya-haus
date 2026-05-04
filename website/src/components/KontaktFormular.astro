@@ -1,0 +1,110 @@
+---
+const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID || '';
+const isPlaceholder = !formspreeId || formspreeId === 'PLACEHOLDER';
+---
+
+{isPlaceholder ? (
+  <div class="p-6 rounded-card bg-amber-50 border border-amber-200">
+    <p class="text-small text-amber-700 mb-2 font-semibold">⚙️ Formspree noch nicht konfiguriert</p>
+    <p class="text-small text-amber-600">
+      Bitte <code class="bg-amber-100 px-1 rounded">PUBLIC_FORMSPREE_ID</code> in <code>.env</code> eintragen.
+      Kostenloses Konto unter <a href="https://formspree.io" target="_blank" rel="noopener" class="underline">formspree.io</a> erstellen.
+    </p>
+  </div>
+) : (
+  <form
+    action={`https://formspree.io/f/${formspreeId}`}
+    method="POST"
+    class="space-y-5"
+  >
+    <!-- Honeypot Spam-Schutz -->
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+    <input type="hidden" name="_next" value="/kontakt/?gesendet=1" />
+    <input type="hidden" name="_subject" value="Neue Kontaktanfrage — himalayahaus.de" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="contact-name" class="block text-small font-semibold text-brand-text mb-1.5">
+          Name <span class="text-brand-rot">*</span>
+        </label>
+        <input
+          type="text"
+          id="contact-name"
+          name="name"
+          required
+          autocomplete="name"
+          class="w-full px-4 py-3 rounded-lg border border-brand-creme-dark bg-white text-brand-text placeholder-brand-text/40 focus:outline-none focus:ring-2 focus:ring-brand-ocker/50 focus:border-brand-ocker transition-colors"
+          placeholder="Ihr vollständiger Name"
+        />
+      </div>
+      <div>
+        <label for="contact-email" class="block text-small font-semibold text-brand-text mb-1.5">
+          E-Mail <span class="text-brand-rot">*</span>
+        </label>
+        <input
+          type="email"
+          id="contact-email"
+          name="email"
+          required
+          autocomplete="email"
+          class="w-full px-4 py-3 rounded-lg border border-brand-creme-dark bg-white text-brand-text placeholder-brand-text/40 focus:outline-none focus:ring-2 focus:ring-brand-ocker/50 focus:border-brand-ocker transition-colors"
+          placeholder="ihre@email.de"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label for="contact-betreff" class="block text-small font-semibold text-brand-text mb-1.5">Betreff</label>
+      <select
+        id="contact-betreff"
+        name="betreff"
+        class="w-full px-4 py-3 rounded-lg border border-brand-creme-dark bg-white text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-ocker/50 focus:border-brand-ocker transition-colors"
+      >
+        <option value="allgemein">Allgemeine Anfrage</option>
+        <option value="spende">Spende / Bankdaten</option>
+        <option value="patenschaft">Kinderpatenschaft</option>
+        <option value="medical-camp">Medical Camp (Arzt-Anfrage)</option>
+        <option value="veranstaltung">Veranstaltung mit Lama Samten</option>
+        <option value="presse">Presse / Medienanfrage</option>
+        <option value="sonstiges">Sonstiges</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="contact-nachricht" class="block text-small font-semibold text-brand-text mb-1.5">
+        Nachricht <span class="text-brand-rot">*</span>
+      </label>
+      <textarea
+        id="contact-nachricht"
+        name="nachricht"
+        rows="6"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-brand-creme-dark bg-white text-brand-text placeholder-brand-text/40 focus:outline-none focus:ring-2 focus:ring-brand-ocker/50 focus:border-brand-ocker transition-colors resize-y"
+        placeholder="Ihre Nachricht an uns..."
+      />
+    </div>
+
+    <div class="flex items-start gap-3">
+      <input
+        type="checkbox"
+        id="contact-dsgvo"
+        name="dsgvo"
+        value="ja"
+        required
+        class="mt-0.5 flex-shrink-0 w-4 h-4 rounded border-brand-creme-dark text-brand-ocker focus:ring-brand-ocker"
+      />
+      <label for="contact-dsgvo" class="text-small text-brand-text/70">
+        Ich habe die <a href="/datenschutz/" class="text-brand-ocker hover:underline">Datenschutzerklärung</a> gelesen
+        und bin mit der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage einverstanden. <span class="text-brand-rot">*</span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn-primary">
+      Nachricht senden
+    </button>
+
+    <p class="text-caption text-brand-text/40">
+      Wir antworten in der Regel innerhalb von 3 Werktagen.
+    </p>
+  </form>
+)}

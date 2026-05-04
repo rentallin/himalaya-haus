@@ -1,0 +1,126 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  noindex?: boolean;
+  canonicalURL?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-default.jpg',
+  ogType = 'website',
+  publishedTime,
+  noindex = false,
+  canonicalURL,
+} = Astro.props;
+
+const siteUrl = 'https://www.himalayahaus.de';
+const canonical = canonicalURL ?? `${siteUrl}${Astro.url.pathname}`;
+const fullTitle = `${title} | Himalaya-Haus e.V.`;
+const ogImageFull = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+const schemaOrg = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': ['Organization', 'NGO'],
+      '@id': `${siteUrl}/#organization`,
+      name: 'Himalaya-Haus e.V.',
+      url: siteUrl,
+      description: 'Gemeinnütziger Verein für Hilfsprojekte in Ladakh, Indien. Nalanda Schule, Kinderpatenschaft und Medical Camp unter Leitung von Lama Konchok Samten.',
+      foundingDate: '2017',
+      address: { '@type': 'PostalAddress', addressLocality: 'Frankfurt am Main', addressCountry: 'DE' },
+      sameAs: [
+        'https://www.facebook.com/Himalayahaus.de',
+        'https://www.instagram.com/himalayahaus.de',
+      ],
+      nonprofitStatus: 'RegisteredCharity',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Himalaya-Haus e.V.',
+      publisher: { '@id': `${siteUrl}/#organization` },
+      inLanguage: 'de-DE',
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="de" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={ogImageFull} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Himalaya-Haus e.V." />
+    <meta property="og:locale" content="de_DE" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageFull} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Himalaya-Haus e.V. Blog" href="/rss.xml" />
+
+    <!-- Fonts: Bunny Fonts (DSGVO-konform, kein Cookie-Consent notwendig) -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=lora:400,400i,600,700|source-sans-3:300,400,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+
+    <!-- Plausible Analytics (nur wenn gesetzt, cookiefrei) -->
+    {import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN && (
+      <script
+        defer
+        data-domain={import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN}
+        src="https://plausible.io/js/script.js"
+      />
+    )}
+  </head>
+  <body x-data="{ mobileOpen: false }">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

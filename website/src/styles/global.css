@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply font-sans text-brand-text bg-brand-creme;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  ::selection {
+    @apply bg-brand-ocker/20 text-brand-text;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-ocker rounded;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full
+           bg-gradient-cta text-white font-sans font-semibold text-body
+           shadow-btn transition-all duration-200
+           hover:scale-105 hover:shadow-lg
+           focus-visible:scale-105 focus-visible:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full
+           border-2 border-brand-ocker text-brand-ocker font-sans font-semibold text-body
+           bg-transparent transition-all duration-200
+           hover:bg-brand-ocker hover:text-white
+           focus-visible:bg-brand-ocker focus-visible:text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-1.5 text-brand-ocker font-semibold
+           underline underline-offset-2 transition-colors duration-150
+           hover:text-brand-erde hover:no-underline;
+  }
+
+  .section-padding {
+    @apply py-section px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding-sm {
+    @apply py-section-sm px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-content {
+    @apply max-w-content mx-auto;
+  }
+
+  .card {
+    @apply bg-white rounded-card shadow-card transition-shadow duration-200
+           hover:shadow-card-lg;
+  }
+
+  .prose-himalaya {
+    @apply prose prose-stone max-w-prose
+           prose-headings:font-serif prose-headings:text-brand-text
+           prose-a:text-brand-ocker prose-a:no-underline hover:prose-a:underline
+           prose-strong:text-brand-text;
+  }
+}

@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import SpendenBox from '@/components/SpendenBox.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+---
+
+<BaseLayout
+  title="Unterstützen — Himalaya-Haus e.V."
+  description="Drei Wege, Kinder in Ladakh zu unterstützen: Einmalspende, Dauerspende oder Kinderpatenschaft. Sicher via Stripe, steuerlich absetzbar."
+>
+  <Hero
+    variant="compact"
+    title="Drei Wege, direkt zu helfen."
+    subtitle="Unterstützen"
+    description="Einmalspende, Dauerspende oder Kinderpatenschaft — alle Wege führen direkt zu den Projekten."
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Unterstützen</span>
+      </nav>
+
+      <!-- 3 Optionen -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        {[
+          {
+            icon: '🎯',
+            titel: 'Einmalspende',
+            beschreibung: 'Unterstützen Sie gezielt ein Projekt mit einem Betrag Ihrer Wahl. Ab 25€ direkte Wirkung.',
+            cta: 'Jetzt spenden',
+            href: '/unterstuetzen/spenden/',
+            highlight: false,
+          },
+          {
+            icon: '🔄',
+            titel: 'Dauerspende',
+            beschreibung: 'Monatliche Unterstützung. Verlässliche Grundlage für laufende Projekte. Jederzeit kündbar.',
+            cta: 'Dauerspende einrichten',
+            href: '/unterstuetzen/spenden/',
+            highlight: false,
+          },
+          {
+            icon: '🤝',
+            titel: 'Kinderpatenschaft',
+            beschreibung: '35€ pro Monat. Ein konkretes Kind. Sie wissen, wen Ihre Unterstützung erreicht.',
+            cta: 'Patenschaft starten',
+            href: '/unterstuetzen/patenschaft/',
+            highlight: true,
+          },
+        ].map(option => (
+          <div class={`card p-8 flex flex-col ${option.highlight ? 'border-2 border-brand-ocker/40' : ''}`}>
+            <div class="text-4xl mb-4">{option.icon}</div>
+            <h2 class="font-serif text-h3 text-brand-text mb-3">{option.titel}</h2>
+            <p class="text-body text-brand-text/70 leading-relaxed mb-6 flex-grow">{option.beschreibung}</p>
+            <a href={option.href} class={option.highlight ? 'btn-primary text-center justify-center' : 'btn-secondary text-center justify-center'}>
+              {option.cta}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Stripe Spenden Box -->
+      <div class="mb-16">
+        <h2 class="font-serif text-h2 text-brand-text mb-8 text-center">Direkt spenden</h2>
+        <SpendenBox variant="fullwidth" />
+      </div>
+
+      <!-- Bankverbindung -->
+      <div class="max-w-xl mx-auto">
+        <h3 class="font-serif text-h3 text-brand-text mb-4 text-center">Lieber per Überweisung?</h3>
+        <div class="p-6 rounded-card bg-brand-creme-dark border border-brand-creme-dark font-mono text-small space-y-3">
+          <div>
+            <div class="text-brand-text/50 font-sans text-caption mb-0.5">Empfänger</div>
+            <div class="font-sans font-semibold text-brand-text">Himalaya-Haus e.V.</div>
+          </div>
+          <div>
+            <div class="text-brand-text/50 font-sans text-caption mb-0.5">IBAN</div>
+            <div class="text-brand-text">Bitte per Kontaktformular anfragen</div>
+          </div>
+          <div>
+            <div class="text-brand-text/50 font-sans text-caption mb-0.5">Bank</div>
+            <div class="text-brand-text">Commerzbank AG</div>
+          </div>
+          <div>
+            <div class="text-brand-text/50 font-sans text-caption mb-0.5">Verwendungszweck</div>
+            <div class="text-brand-text font-sans">Nalanda Schule / Patenschaft / Medical Camp</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NewsletterFormular />
+</BaseLayout>

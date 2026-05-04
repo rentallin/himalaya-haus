@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import SpendenBox from '@/components/SpendenBox.astro';
+import WirkungsRechner from '@/components/WirkungsRechner.astro';
+---
+
+<BaseLayout
+  title="Jetzt spenden — Himalaya-Haus e.V."
+  description="Unterstützen Sie Kinder in Ladakh mit einer Einmalspende oder Dauerspende. Sicher via Stripe, steuerlich absetzbar. Oder per Banküberweisung."
+>
+  <Hero
+    variant="compact"
+    title="Ihre Spende. Direkter Weg. Klare Wirkung."
+    subtitle="Jetzt unterstützen"
+    description="Keine Verwaltungsprovision. Kein Overhead. Ihre Spende geht direkt in Schulbau, Patenschaft oder Medical Camp."
+  />
+
+  <!-- Stripe Payment -->
+  <SpendenBox variant="fullwidth" />
+
+  <!-- Wirkungsrechner -->
+  <WirkungsRechner />
+
+  <!-- Bankverbindung Fallback -->
+  <section id="bankverbindung" class="section-padding bg-white">
+    <div class="container-content max-w-2xl">
+      <h2 class="font-serif text-h2 text-brand-text mb-4">Lieber per Überweisung spenden?</h2>
+      <p class="text-body text-brand-text/70 mb-8">
+        Kein Problem. Überweisen Sie an folgende Bankverbindung.
+        Bitte geben Sie als Verwendungszweck das gewünschte Projekt an.
+      </p>
+
+      <div class="p-6 rounded-card bg-brand-creme-dark border border-brand-creme-dark font-mono text-small space-y-3">
+        <div>
+          <div class="text-brand-text/50 font-sans text-caption mb-0.5">Empfänger</div>
+          <div class="font-sans font-semibold text-brand-text">Himalaya-Haus e.V.</div>
+        </div>
+        <div>
+          <div class="text-brand-text/50 font-sans text-caption mb-0.5">IBAN</div>
+          <div class="text-brand-text">Bitte per Kontaktformular anfragen</div>
+        </div>
+        <div>
+          <div class="text-brand-text/50 font-sans text-caption mb-0.5">BIC / Bank</div>
+          <div class="text-brand-text">Commerzbank AG</div>
+        </div>
+        <div>
+          <div class="text-brand-text/50 font-sans text-caption mb-0.5">Verwendungszweck</div>
+          <div class="text-brand-text font-sans">
+            Nalanda Schule <span class="text-brand-text/40 mx-2">oder</span>
+            Patenschaft <span class="text-brand-text/40 mx-2">oder</span>
+            Medical Camp
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steuerliche Info -->
+  <section class="section-padding-sm bg-brand-creme-dark">
+    <div class="container-content max-w-2xl">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="card p-5">
+          <div class="text-2xl mb-3">📄</div>
+          <h3 class="font-serif text-h4 text-brand-text mb-2">Spendenquittung</h3>
+          <p class="text-small text-brand-text/70">
+            Ab 50€ erhalten Sie automatisch eine Zuwendungsbestätigung.
+            Für kleinere Beträge reicht der Kontoauszug als Nachweis.
+          </p>
+        </div>
+        <div class="card p-5">
+          <div class="text-2xl mb-3">💶</div>
+          <h3 class="font-serif text-h4 text-brand-text mb-2">Steuerlich absetzbar</h3>
+          <p class="text-small text-brand-text/70">
+            Himalaya-Haus e.V. ist als gemeinnützig anerkannt. Spenden sind bis zu 20% des
+            Gesamtbetrags der Einkünfte steuerlich absetzbar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

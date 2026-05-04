@@ -1,0 +1,97 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+---
+
+<BaseLayout
+  title="Vorstand — Himalaya-Haus e.V."
+  description="Der Vorstand des Himalaya-Haus e.V.: Lama Konchok Samten, Oliver und Clarissa. Gemeinnützig, transparent, direkt."
+>
+  <Hero
+    variant="compact"
+    title="Menschen hinter dem Verein"
+    subtitle="Vorstand"
+    description="Drei Menschen, eine Überzeugung: Konkrete Hilfe braucht keine Komplexität."
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <a href="/ueber-uns/" class="hover:text-brand-ocker">Über uns</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Vorstand</span>
+      </nav>
+
+      <div class="max-w-3xl mx-auto space-y-12">
+        <!-- Lama Samten -->
+        <div class="card p-8 grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8">
+          <div class="flex flex-col items-center sm:items-start gap-4">
+            <div class="w-20 h-20 rounded-full bg-gradient-cta flex items-center justify-center flex-shrink-0">
+              <span class="font-serif text-white text-h2">LS</span>
+            </div>
+            <a href="/ueber-uns/lama-konchok/" class="btn-ghost text-small text-center">Mehr erfahren →</a>
+          </div>
+          <div>
+            <h2 class="font-serif text-h2 text-brand-text mb-1">Lama Konchok Samten</h2>
+            <p class="text-caption text-brand-ocker font-semibold mb-4">Mitgründer & 1. Vorsitzender</p>
+            <div class="prose-himalaya space-y-3">
+              <p>
+                Lama Konchok Samten wurde 1981 in Ladakh geboren. Er ist buddhistischer Mönch der
+                Drikung-Kagyü-Tradition und lebt zwischen Ladakh und Deutschland.
+              </p>
+              <p>
+                Er ist die Verbindung zu allen Projekten vor Ort. Kein Projekt läuft ohne seinen
+                direkten Kontakt zu den Menschen, die es betrifft. Das ist das Rückgrat des Vereins.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Oliver -->
+        <div class="card p-8 grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8">
+          <div class="w-20 h-20 rounded-full bg-brand-creme-dark flex items-center justify-center flex-shrink-0">
+            <span class="font-serif text-brand-text text-h2">OL</span>
+          </div>
+          <div>
+            <h2 class="font-serif text-h2 text-brand-text mb-1">Oliver</h2>
+            <p class="text-caption text-brand-ocker font-semibold mb-4">Mitgründer & 2. Vorsitzender</p>
+            <div class="prose-himalaya space-y-3">
+              <p>
+                Oliver ist Unternehmer aus dem Schwarzwald, seit über 25 Jahren in Immobilien und
+                Finanzen tätig. Er kennt Lama Samten seit Jahren und brachte die organisatorische
+                Struktur ein, die nötig war, um die Idee in einen eingetragenen gemeinnützigen
+                Verein zu überführen.
+              </p>
+              <p>
+                Er kümmert sich um Verwaltung, Finanzen und alles, was den reibungslosen Betrieb
+                des Vereins sicherstellt.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clarissa -->
+        <div class="card p-8 grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8">
+          <div class="w-20 h-20 rounded-full bg-brand-creme-dark flex items-center justify-center flex-shrink-0">
+            <span class="font-serif text-brand-text text-h2">CL</span>
+          </div>
+          <div>
+            <h2 class="font-serif text-h2 text-brand-text mb-1">Clarissa</h2>
+            <p class="text-caption text-brand-ocker font-semibold mb-4">Vorstandsmitglied — Kommunikation</p>
+            <div class="prose-himalaya space-y-3">
+              <p>
+                Clarissa ist Unternehmerin und unterstützt den Verein seit seiner Gründung.
+                Sie koordiniert Teile der Kommunikation und Öffentlichkeitsarbeit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NewsletterFormular />
+</BaseLayout>

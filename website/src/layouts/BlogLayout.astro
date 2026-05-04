@@ -1,0 +1,161 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, author, heroImage, heroImageAlt, category, tags } = post.data;
+
+const siteUrl = 'https://www.himalayahaus.de';
+const canonical = `${siteUrl}${Astro.url.pathname}`;
+
+const categoryLabels: Record<string, string> = {
+  'schulbau': 'Schulbau',
+  'waisenhaus': 'Waisenhaus',
+  'medical-camp': 'Medical Camp',
+  'kinderpatenschaft': 'Kinderpatenschaft',
+  'reisebericht': 'Reisebericht',
+  'vereinsnews': 'Vereinsnews',
+  'ladakh-kultur': 'Ladakh & Kultur',
+};
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  image: heroImage ? `${siteUrl}${heroImage}` : `${siteUrl}/og-default.jpg`,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  author: {
+    '@type': 'Person',
+    name: author,
+    url: author === 'Lama Konchok Samten' ? `${siteUrl}/ueber-uns/lama-konchok/` : siteUrl,
+  },
+  publisher: { '@id': `${siteUrl}/#organization` },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  inLanguage: 'de-DE',
+  keywords: tags.join(', '),
+};
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  ogImage={heroImage}
+  publishedTime={pubDate.toISOString()}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)} slot="head" />
+
+  <article class="bg-brand-creme">
+    <!-- Hero Image -->
+    {heroImage ? (
+      <div class="h-72 md:h-96 relative overflow-hidden">
+        <img src={heroImage} alt={heroImageAlt ?? title} class="w-full h-full object-cover" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-hero" />
+      </div>
+    ) : (
+      <div class="h-32 bg-brand-creme-dark" />
+    )}
+
+    <!-- Article Content -->
+    <div class="container-content section-padding-sm">
+      <!-- Breadcrumb -->
+      <nav class="text-small text-gray-500 mb-6" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker transition-colors">Startseite</a>
+        <span class="mx-2">/</span>
+        <a href="/blog/" class="hover:text-brand-ocker transition-colors">Blog</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">{title}</span>
+      </nav>
+
+      <!-- Category + Date -->
+      <div class="flex flex-wrap items-center gap-3 mb-4">
+        <span class="px-3 py-1 rounded-full text-small font-semibold bg-brand-ocker/10 text-brand-ocker">
+          {categoryLabels[category] ?? category}
+        </span>
+        <time datetime={pubDate.toISOString()} class="text-small text-gray-500">
+          {formatDate(pubDate)}
+        </time>
+        {updatedDate && updatedDate > pubDate && (
+          <span class="text-small text-gray-400">
+            (Aktualisiert: {formatDate(updatedDate)})
+          </span>
+        )}
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-serif text-h1 text-brand-text mb-4">{title}</h1>
+
+      <!-- Author -->
+      <div class="flex items-center gap-3 mb-8 pb-8 border-b border-brand-creme-dark">
+        <div class="w-10 h-10 rounded-full bg-brand-ocker/20 flex items-center justify-center">
+          <span class="text-brand-ocker font-semibold text-small">
+            {author.split(' ').map(w => w[0]).join('').slice(0, 2)}
+          </span>
+        </div>
+        <div>
+          <div class="font-semibold text-brand-text">{author}</div>
+          <div class="text-small text-gray-500">Himalaya-Haus e.V.</div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="prose-himalaya">
+        <slot />
+      </div>
+
+      <!-- Tags -->
+      {tags.length > 0 && (
+        <div class="mt-8 pt-8 border-t border-brand-creme-dark">
+          <div class="flex flex-wrap gap-2">
+            {tags.map(tag => (
+              <span class="px-2.5 py-1 rounded-full text-caption bg-brand-creme-dark text-brand-text/70">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Author Bio (if Lama Samten) -->
+      {author === 'Lama Konchok Samten' && (
+        <div class="mt-10 p-6 rounded-card bg-brand-creme-dark border border-brand-ocker/20">
+          <div class="flex items-start gap-4">
+            <div class="w-16 h-16 rounded-full bg-brand-ocker/20 flex-shrink-0 flex items-center justify-center">
+              <span class="text-brand-ocker font-serif text-h3">L</span>
+            </div>
+            <div>
+              <h3 class="font-serif text-h4 text-brand-text mb-1">Lama Konchok Samten</h3>
+              <p class="text-small text-gray-600 mb-3">
+                Buddhistischer Mönch der Drikung-Kagyü-Tradition, geboren 1981 in Ladakh.
+                Mitgründer und Herzstück von Himalaya-Haus e.V.
+              </p>
+              <a href="/ueber-uns/lama-konchok/" class="btn-ghost text-small">
+                Mehr über Lama Samten →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Newsletter CTA -->
+      <div class="mt-12 p-8 rounded-card bg-gradient-cta text-white text-center">
+        <h3 class="font-serif text-h3 mb-2">Berichte direkt aus Ladakh</h3>
+        <p class="text-white/90 mb-6">
+          Baufortschritte, Reiseberichte und Reflexionen von Lama Samten — ca. viermal pro Jahr.
+        </p>
+        <a href="/newsletter/" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-erde font-semibold transition-all duration-200 hover:bg-brand-creme hover:scale-105">
+          Newsletter abonnieren
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

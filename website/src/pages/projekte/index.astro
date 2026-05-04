@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import ProjektKarte from '@/components/ProjektKarte.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { getCollection } from 'astro:content';
+
+const projekte = (await getCollection('projekte'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Unsere Projekte — Nalanda Schule, Patenschaft, Medical Camp"
+  description="Drei konkrete Projekte in Ladakh: Die Nalanda Schule im Bau, Kinderpatenschaften für bedürftige Kinder und jährliche Medical Camps mit deutschen Ärzten."
+>
+  <Hero
+    variant="compact"
+    title="Drei Projekte. Direkter Weg. Klare Wirkung."
+    subtitle="Unsere Arbeit in Ladakh"
+    description="Jedes Projekt ist konkret, nachverfolgbar und direkt von Lama Konchok Samten vor Ort begleitet."
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Projekte</span>
+      </nav>
+
+      {projekte.length > 0 ? (
+        <div class="space-y-8">
+          {projekte.map((projekt, i) => (
+            <ProjektKarte
+              title={projekt.data.title}
+              description={projekt.data.description}
+              href={`/projekte/${projekt.slug}/`}
+              status={projekt.data.status}
+              image={projekt.data.heroImage}
+              imageAlt={projekt.data.heroImageAlt}
+              label={projekt.data.location}
+              variant={i === 0 ? 'featured' : 'horizontal'}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <ProjektKarte
+            title="Nalanda Schule & Waisenhaus"
+            description="Internat für 200 Kinder in Saboo bei Leh. Ökologisch gebaut nach Passivhaus-Prinzip. Seit 2019 im Bau."
+            href="/projekte/nalanda-schule/"
+            status="im-bau"
+            label="Saboo bei Leh, Ladakh"
+            variant="vertikal"
+          />
+          <ProjektKarte
+            title="Kinderpatenschaft"
+            description="Monatliche Direktunterstützung für ein konkretes Kind — Schule, Unterkunft, Mahlzeiten."
+            href="/projekte/patenschaft/"
+            status="aktiv"
+            label="Ladakh, Indien"
+            variant="vertikal"
+          />
+          <ProjektKarte
+            title="Medical Camp"
+            description="Jährliche medizinische Camps mit deutschen Ärzten in Dörfern ohne Gesundheitsversorgung."
+            href="/projekte/medical-camp/"
+            status="aktiv"
+            label="Mobile Camps, Ladakh"
+            variant="vertikal"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <NewsletterFormular />
+</BaseLayout>

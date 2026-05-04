@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+---
+
+<BaseLayout
+  title="Danke — Himalaya-Haus e.V."
+  description="Vielen Dank für Ihre Unterstützung. Ihre Spende erreicht Kinder in Ladakh direkt."
+>
+  <section class="section-padding bg-brand-creme min-h-[60vh] flex items-center">
+    <div class="container-content max-w-2xl text-center">
+      <div class="w-20 h-20 rounded-full bg-gradient-cta flex items-center justify-center mx-auto mb-8">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h1 class="font-serif text-h1 text-brand-text mb-4">Herzlichen Dank.</h1>
+      <p class="text-body text-brand-text/70 mb-8 leading-relaxed">
+        Ihre Zahlung wurde erfolgreich verarbeitet. Sie erhalten in Kürze eine Bestätigung per E-Mail
+        — direkt von Stripe, da Zahlungen dort sicher verarbeitet werden.
+      </p>
+
+      <div class="card p-6 text-left mb-8">
+        <h2 class="font-serif text-h3 text-brand-text mb-4">Was jetzt passiert</h2>
+        <ol class="space-y-3">
+          {[
+            'Sie erhalten eine Zahlungsbestätigung per E-Mail (bitte ggf. Spam-Ordner prüfen).',
+            'Für Beträge ab 50€ stellen wir automatisch eine Zuwendungsbestätigung aus — jährlich im Januar.',
+            'Ihre Spende fließt direkt in das gewählte Projekt. Kein Overhead, kein Verwaltungsanteil.',
+          ].map((item, i) => (
+            <li class="flex gap-4">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-ocker/20 flex items-center justify-center text-brand-ocker font-bold text-caption">
+                {i + 1}
+              </span>
+              <p class="text-small text-brand-text/70 leading-relaxed">{item}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="btn-primary">Zur Startseite</a>
+        <a href="/projekte/" class="btn-secondary">Projekte ansehen</a>
+      </div>
+    </div>
+  </section>
+
+  <NewsletterFormular />
+</BaseLayout>

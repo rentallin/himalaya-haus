@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Seite nicht gefunden — Himalaya-Haus e.V."
+  description="Diese Seite existiert nicht. Zurück zur Startseite."
+>
+  <section class="section-padding bg-brand-creme min-h-[70vh] flex items-center">
+    <div class="container-content max-w-xl text-center">
+      <p class="font-serif text-display text-brand-ocker/30 mb-4">404</p>
+      <h1 class="font-serif text-h1 text-brand-text mb-4">Seite nicht gefunden</h1>
+      <p class="text-body text-brand-text/70 mb-10">
+        Diese Seite existiert nicht oder wurde verschoben.
+        Vielleicht finden Sie, was Sie suchen, über die Navigation.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="btn-primary">Zur Startseite</a>
+        <a href="/projekte/" class="btn-secondary">Unsere Projekte</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

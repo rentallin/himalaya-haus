@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import BlogPostKarte from '@/components/BlogPostKarte.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categoryLabels: Record<string, string> = {
+  'schulbau': 'Schulbau',
+  'waisenhaus': 'Waisenhaus',
+  'medical-camp': 'Medical Camp',
+  'kinderpatenschaft': 'Kinderpatenschaft',
+  'reisebericht': 'Reisebericht',
+  'vereinsnews': 'Vereinsnews',
+  'ladakh-kultur': 'Ladakh & Kultur',
+};
+---
+
+<BaseLayout
+  title="Blog — Himalaya-Haus e.V."
+  description="Aktuelle Berichte aus Ladakh: Baufortschritt der Nalanda Schule, Medical Camp Rückblicke, Hintergründe zu unseren Projekten."
+>
+  <Hero
+    variant="compact"
+    title="Aus erster Hand: Berichte aus Ladakh"
+    subtitle="Blog & Aktuelles"
+    description="Baufortschritt, Medical Camps, Patenschaften — direkte Berichte von Lama Samten und unserem Team."
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Blog</span>
+      </nav>
+
+      {allPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {allPosts.map(post => (
+            <BlogPostKarte
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              author={post.data.author}
+              href={`/blog/${post.slug}/`}
+              category={post.data.category}
+              heroImage={post.data.heroImage}
+              heroImageAlt={post.data.heroImageAlt}
+              variant={post.data.featured ? 'featured' : 'standard'}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-20">
+          <p class="text-body text-brand-text/60">Noch keine Beiträge vorhanden.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <NewsletterFormular />
+</BaseLayout>

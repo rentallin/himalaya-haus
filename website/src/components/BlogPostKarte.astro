@@ -1,0 +1,95 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  pubDate: Date;
+  author: string;
+  category: string;
+  heroImage?: string;
+  heroImageAlt?: string;
+  variant?: 'standard' | 'kompakt' | 'featured';
+}
+
+const { title, description, href, pubDate, author, category, heroImage, heroImageAlt, variant = 'standard' } = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  'schulbau': 'Schulbau',
+  'waisenhaus': 'Waisenhaus',
+  'medical-camp': 'Medical Camp',
+  'kinderpatenschaft': 'Patenschaft',
+  'reisebericht': 'Reisebericht',
+  'vereinsnews': 'Vereinsnews',
+  'ladakh-kultur': 'Ladakh & Kultur',
+};
+
+const formatDate = (d: Date) => d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+{variant === 'featured' ? (
+  <a href={href} class="group block card overflow-hidden md:flex">
+    <div class="relative md:w-2/5 h-56 md:h-auto overflow-hidden">
+      {heroImage ? (
+        <img src={heroImage} alt={heroImageAlt ?? title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      ) : (
+        <div class="w-full h-full bg-gradient-cta" />
+      )}
+    </div>
+    <div class="p-7 flex flex-col justify-center flex-1">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-caption px-2.5 py-0.5 rounded-full bg-brand-ocker/10 text-brand-ocker font-semibold">
+          {categoryLabels[category] ?? category}
+        </span>
+        <time class="text-caption text-brand-text/50" datetime={pubDate.toISOString()}>
+          {formatDate(pubDate)}
+        </time>
+      </div>
+      <h3 class="font-serif text-h3 text-brand-text mb-3 group-hover:text-brand-ocker transition-colors">{title}</h3>
+      <p class="text-body text-brand-text/70 mb-4 line-clamp-3">{description}</p>
+      <span class="btn-ghost self-start">Weiterlesen →</span>
+    </div>
+  </a>
+) : variant === 'kompakt' ? (
+  <a href={href} class="group flex gap-4 card p-4">
+    <div class="relative w-20 h-16 flex-shrink-0 rounded-lg overflow-hidden">
+      {heroImage ? (
+        <img src={heroImage} alt={heroImageAlt ?? title} class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+      ) : (
+        <div class="w-full h-full bg-gradient-cta" />
+      )}
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-caption text-brand-ocker/80 font-semibold mb-0.5">{categoryLabels[category] ?? category}</div>
+      <h4 class="font-serif text-h4 text-brand-text group-hover:text-brand-ocker transition-colors line-clamp-2 leading-snug">{title}</h4>
+      <time class="text-caption text-brand-text/40">{formatDate(pubDate)}</time>
+    </div>
+  </a>
+) : (
+  <a href={href} class="group flex flex-col card overflow-hidden">
+    <div class="relative h-48 overflow-hidden">
+      {heroImage ? (
+        <img src={heroImage} alt={heroImageAlt ?? title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      ) : (
+        <div class="w-full h-full bg-gradient-cta flex items-center justify-center">
+          <span class="font-serif text-white text-display opacity-20">{categoryLabels[category]?.[0] ?? 'B'}</span>
+        </div>
+      )}
+      <div class="absolute top-3 left-3">
+        <span class="text-caption px-2.5 py-1 rounded-full backdrop-blur-sm bg-brand-ocker/90 text-white font-semibold">
+          {categoryLabels[category] ?? category}
+        </span>
+      </div>
+    </div>
+    <div class="p-5 flex flex-col flex-1">
+      <div class="flex items-center justify-between mb-2">
+        <time class="text-caption text-brand-text/50" datetime={pubDate.toISOString()}>
+          {formatDate(pubDate)}
+        </time>
+        <span class="text-caption text-brand-text/40">{author.split(' ').slice(-1)[0]}</span>
+      </div>
+      <h3 class="font-serif text-h4 text-brand-text mb-2 group-hover:text-brand-ocker transition-colors line-clamp-2">{title}</h3>
+      <p class="text-small text-brand-text/60 flex-1 line-clamp-3 mb-4">{description}</p>
+      <span class="btn-ghost self-start text-small">Weiterlesen →</span>
+    </div>
+  </a>
+)}

@@ -1,0 +1,110 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import ImpactZahlen from '@/components/ImpactZahlen.astro';
+import WirkungsRechner from '@/components/WirkungsRechner.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+---
+
+<BaseLayout
+  title="Wirkung — Himalaya-Haus e.V."
+  description="Was Ihre Spende bewirkt: Konkrete Zahlen zur Nalanda Schule, Kinderpatenschaften und Medical Camps in Ladakh. Transparent und direkt."
+>
+  <Hero
+    variant="compact"
+    title="Was Ihre Unterstützung bewirkt."
+    subtitle="Wirkung & Transparenz"
+    description="Keine abstrakten Versprechen. Konkrete Zahlen. Direkte Verbindung."
+  />
+
+  <ImpactZahlen />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Wirkung</span>
+      </nav>
+
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-serif text-h2 text-brand-text mb-6">Wie wir Wirkung messen</h2>
+        <div class="prose-himalaya space-y-4 mb-12">
+          <p>
+            Wir haben keine eigene Wirkungsmessungsabteilung. Das wäre auch Unsinn für einen Verein
+            unserer Größe. Was wir haben: Direkte Verbindung zu den Menschen, die wir unterstützen.
+          </p>
+          <p>
+            Lama Konchok Samten lebt einen großen Teil des Jahres in Ladakh. Er besucht die Kinder,
+            kennt die Familien, sieht den Baufortschritt. Die Berichte, die Sie im Blog lesen, kommen
+            direkt von ihm. Keine PR-Agentur, keine schöngeschriebene Fassung.
+          </p>
+          <p>
+            Was wir messen: Anzahl unterstützter Kinder, Schuljahre finanziert, Patienten behandelt,
+            Quadratmeter gebaut. Das sind die Zahlen, die zählen.
+          </p>
+        </div>
+
+        <!-- Wirkungstabelle nach Betrag -->
+        <h3 class="font-serif text-h3 text-brand-text mb-6">Was konkrete Beträge bewirken</h3>
+        <div class="overflow-x-auto mb-12">
+          <table class="w-full text-small">
+            <thead>
+              <tr class="border-b-2 border-brand-ocker/30">
+                <th class="text-left py-3 pr-6 font-semibold text-brand-text">Betrag</th>
+                <th class="text-left py-3 pr-6 font-semibold text-brand-text">Nalanda Schule</th>
+                <th class="text-left py-3 font-semibold text-brand-text">Medical Camp</th>
+              </tr>
+            </thead>
+            <tbody class="text-brand-text/70">
+              {[
+                ['25 €', 'Schulmaterial für 1 Kind / 1 Monat', 'Medikamente für 3 Patienten'],
+                ['50 €', 'Mahlzeiten für 1 Kind / 1 Monat', 'Grundausstattung 1 Behandlungsplatz'],
+                ['100 €', '1 m² Außenwand Rohbau', 'Vollversorgung 1 Patient inkl. Medikamente'],
+                ['500 €', 'Fenster für 1 Klassenraum', 'Transport 1 Camp-Tag'],
+                ['1.000 €', 'Vollständige Ausstattung 1 Schülerbett', 'Hälfte der Medikamenten-Ausrüstung'],
+                ['5.000 €', 'Ausstattung 1 vollständiger Klassenraum', '2 vollständige Camp-Tage'],
+              ].map(([betrag, nalanda, medical]) => (
+                <tr class="border-b border-brand-creme-dark">
+                  <td class="py-3 pr-6 font-semibold text-brand-ocker">{betrag}</td>
+                  <td class="py-3 pr-6">{nalanda}</td>
+                  <td class="py-3">{medical}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Transparenz -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+          <div class="card p-6">
+            <h4 class="font-serif text-h4 text-brand-text mb-3">Jahresberichte</h4>
+            <p class="text-small text-brand-text/70 mb-4">
+              Wir veröffentlichen jährliche Finanzberichte mit Aufschlüsselung nach Projekt und Verwendungszweck.
+            </p>
+            <div class="p-3 rounded bg-brand-creme-dark text-small text-brand-text/50 italic">
+              Jahresbericht 2024 — wird demnächst veröffentlicht
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h4 class="font-serif text-h4 text-brand-text mb-3">Gemeinnützigkeit</h4>
+            <p class="text-small text-brand-text/70 mb-4">
+              Himalaya-Haus e.V. ist als gemeinnützig anerkannt. Spenden sind steuerlich absetzbar.
+              Zuwendungsbestätigungen ab 50€ automatisch jährlich.
+            </p>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-small text-brand-text font-semibold">Gemeinnützig anerkannt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WirkungsRechner />
+  <NewsletterFormular />
+</BaseLayout>

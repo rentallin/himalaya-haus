@@ -1,0 +1,123 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import BaufortschrittTimeline from '@/components/BaufortschrittTimeline.astro';
+import SpendenBox from '@/components/SpendenBox.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projekte = await getCollection('projekte');
+  return projekte.map(p => ({ params: { slug: p.slug }, props: { projekt: p } }));
+}
+
+interface Props { projekt: CollectionEntry<'projekte'>; }
+const { projekt } = Astro.props;
+const { Content } = await projekt.render();
+
+const statusLabels = {
+  'im-bau': 'Im Bau',
+  'aktiv': 'Aktiv',
+  'abgeschlossen': 'Abgeschlossen',
+  'planung': 'In Planung',
+};
+
+const isNalanda = projekt.slug === 'nalanda-schule';
+---
+
+<BaseLayout
+  title={projekt.data.seoTitle ?? projekt.data.title}
+  description={projekt.data.seoDescription ?? projekt.data.description}
+>
+  <Hero
+    variant="compact"
+    title={projekt.data.title}
+    subtitle={projekt.data.location}
+    description={projekt.data.description}
+    badge={statusLabels[projekt.data.status]}
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <a href="/projekte/" class="hover:text-brand-ocker">Projekte</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">{projekt.data.title}</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <!-- Progress bar for Nalanda -->
+          {projekt.data.targetAmount && projekt.data.raisedAmount && (
+            <div class="card p-6 mb-8">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-semibold text-brand-text text-body">Spendenfortschritt</span>
+                <span class="font-serif text-h4 text-brand-ocker">
+                  {Math.round((projekt.data.raisedAmount / projekt.data.targetAmount) * 100)}%
+                </span>
+              </div>
+              <div class="w-full bg-brand-creme-dark rounded-full h-3 overflow-hidden">
+                <div
+                  class="h-3 rounded-full bg-gradient-cta transition-all duration-700"
+                  style={`width: ${Math.min(100, Math.round((projekt.data.raisedAmount / projekt.data.targetAmount) * 100))}%`}
+                />
+              </div>
+              <div class="flex justify-between mt-2 text-small text-brand-text/60">
+                <span>{projekt.data.raisedAmount.toLocaleString('de-DE')} € gesammelt</span>
+                <span>Ziel: {projekt.data.targetAmount.toLocaleString('de-DE')} €</span>
+              </div>
+              {projekt.data.beneficiaries && (
+                <p class="text-small text-brand-text/70 mt-3">
+                  Begünstigte: <strong class="text-brand-text">{projekt.data.beneficiaries}</strong>
+                </p>
+              )}
+            </div>
+          )}
+
+          <div class="prose-himalaya">
+            <Content />
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <SpendenBox variant="sidebar" />
+
+          <!-- Key Facts -->
+          <div class="card p-5">
+            <h4 class="font-serif text-h4 text-brand-text mb-4">Projektinfo</h4>
+            <dl class="space-y-3 text-small">
+              <div>
+                <dt class="text-brand-text/50">Status</dt>
+                <dd class="font-semibold text-brand-text">{statusLabels[projekt.data.status]}</dd>
+              </div>
+              <div>
+                <dt class="text-brand-text/50">Standort</dt>
+                <dd class="font-semibold text-brand-text">{projekt.data.location}</dd>
+              </div>
+              {projekt.data.startDate && (
+                <div>
+                  <dt class="text-brand-text/50">Beginn</dt>
+                  <dd class="font-semibold text-brand-text">
+                    {projekt.data.startDate.toLocaleDateString('de-DE', { year: 'numeric', month: 'long' })}
+                  </dd>
+                </div>
+              )}
+              {projekt.data.beneficiaries && (
+                <div>
+                  <dt class="text-brand-text/50">Begünstigte</dt>
+                  <dd class="font-semibold text-brand-text">{projekt.data.beneficiaries}</dd>
+                </div>
+              )}
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {isNalanda && <BaufortschrittTimeline />}
+
+  <NewsletterFormular />
+</BaseLayout>

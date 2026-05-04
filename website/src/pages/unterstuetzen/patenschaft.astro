@@ -1,0 +1,147 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import KontaktFormular from '@/components/KontaktFormular.astro';
+import NewsletterFormular from '@/components/NewsletterFormular.astro';
+
+const stripeLink = import.meta.env.PUBLIC_STRIPE_LINK_PATENSCHAFT || '/unterstuetzen/spenden/';
+---
+
+<BaseLayout
+  title="Kinderpatenschaft Ladakh — Himalaya-Haus e.V."
+  description="Übernehmen Sie eine Kinderpatenschaft für ein Kind in Ladakh. 35€ pro Monat ermöglicht Schulbildung, Unterkunft und Mahlzeiten für ein konkretes Kind."
+>
+  <Hero
+    variant="compact"
+    title="Eine Patenschaft: Wissen, wen Ihre Unterstützung erreicht."
+    subtitle="Kinderpatenschaft Ladakh"
+    description="35 € pro Monat. Ein konkretes Kind. Echter Kontakt."
+    ctaPrimary={{ label: 'Jetzt Patenschaft starten', href: stripeLink }}
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <a href="/unterstuetzen/" class="hover:text-brand-ocker">Unterstützen</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Patenschaft</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div>
+          <!-- 4-Schritte-Prozess -->
+          <h2 class="font-serif text-h2 text-brand-text mb-8">Wie eine Patenschaft funktioniert</h2>
+          <ol class="space-y-6">
+            {[
+              {
+                n: 1,
+                titel: 'Patenschaft starten',
+                text: 'Sie klicken auf "Jetzt Patenschaft starten" und richten über Stripe eine monatliche Zahlung ein — per SEPA-Lastschrift, Kreditkarte oder PayPal.',
+              },
+              {
+                n: 2,
+                titel: 'Kind zugeordnet werden',
+                text: 'Lama Samten wählt gemeinsam mit lokalen Strukturen ein Kind aus, das Unterstützung benötigt. Sie erhalten alle Informationen über Ihr Patenkind.',
+              },
+              {
+                n: 3,
+                titel: 'Geld kommt an',
+                text: 'Ihre monatliche Zahlung fließt direkt in Schulgebühren, Unterkunft, Mahlzeiten und Kleidung. Keine Verwaltungsprovision.',
+              },
+              {
+                n: 4,
+                titel: 'Updates erhalten',
+                text: 'Sie bekommen regelmäßige Rückmeldungen über Ihr Patenkind — schriftlich, mit Fotos, aus erster Hand.',
+              },
+            ].map(step => (
+              <li class="flex gap-5">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-cta flex items-center justify-center text-white font-bold font-serif text-h4">
+                  {step.n}
+                </div>
+                <div>
+                  <h3 class="font-serif text-h4 text-brand-text mb-1.5">{step.titel}</h3>
+                  <p class="text-body text-brand-text/70 leading-relaxed">{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <!-- Was eine Patenschaft NICHT ist -->
+          <div class="mt-10 p-5 rounded-card bg-brand-creme-dark">
+            <h4 class="font-serif text-h4 text-brand-text mb-2">Was eine Patenschaft nicht ist</h4>
+            <p class="text-body text-brand-text/70 leading-relaxed">
+              Eine Patenschaft ist kein Adoptionsverhältnis. Sie begründet keine persönliche
+              Verantwortung über die monatliche Zahlung hinaus. Sie müssen nicht nach Ladakh reisen,
+              nicht Briefe schreiben, nicht "verfügbar" sein. Wenn Sie mehr Kontakt wünschen, ist das
+              möglich — aber keine Pflicht.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Stripe Patenschaft CTA -->
+          <div class="card p-8 border-2 border-brand-ocker/30">
+            <h3 class="font-serif text-h3 text-brand-text mb-2">Patenschaft starten</h3>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="font-serif text-display text-brand-ocker">35 €</span>
+              <span class="text-body text-brand-text/60">/ Monat</span>
+            </div>
+            <ul class="text-small text-brand-text/70 space-y-2 mb-6">
+              {[
+                'Schulbildung für ein konkretes Kind',
+                'Unterkunft und Mahlzeiten',
+                'Kleidung und Schulmaterial',
+                'Regelmäßige Updates & Fotos',
+                'Steuerlich absetzbar',
+                'Jederzeit kündbar',
+              ].map(item => (
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a href={stripeLink} class="btn-primary w-full justify-center text-center">
+              Jetzt Patenschaft starten
+            </a>
+            <p class="text-caption text-brand-text/50 text-center mt-3">
+              SEPA-Lastschrift · Kreditkarte · PayPal — via Stripe
+            </p>
+          </div>
+
+          <!-- FAQ -->
+          <div x-data="{ open: null }" class="space-y-2">
+            <h4 class="font-serif text-h4 text-brand-text mb-4">Häufige Fragen</h4>
+            {[
+              { q: 'Kann ich die Patenschaft jederzeit kündigen?', a: 'Ja. Monatliche Kündigungsfrist. Kein Minimum.' },
+              { q: 'Wie viel geht wirklich zum Kind?', a: 'Ihre gesamte Zahlung. Wir erheben keine Verwaltungsgebühr auf Patenschaften.' },
+              { q: 'Bekomme ich eine Spendenquittung?', a: 'Ja. Automatisch jährlich im Januar per E-Mail.' },
+              { q: 'Kann ich mehr als ein Kind unterstützen?', a: 'Selbstverständlich. Einfach mehrfach registrieren oder uns direkt kontaktieren.' },
+            ].map((faq, i) => (
+              <div class="rounded-card border border-brand-creme-dark overflow-hidden">
+                <button
+                  @click={`open === ${i} ? open = null : open = ${i}`}
+                  class="w-full flex items-center justify-between p-4 text-left hover:bg-brand-creme-dark transition-colors"
+                >
+                  <span class="font-semibold text-brand-text text-small">{faq.q}</span>
+                  <svg class="w-4 h-4 text-brand-ocker flex-shrink-0 ml-3 transition-transform duration-150" :class={`open === ${i} ? 'rotate-180' : ''`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div x-show={`open === ${i}`} x-transition class="px-4 pb-4">
+                  <p class="text-small text-brand-text/70">{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NewsletterFormular />
+</BaseLayout>

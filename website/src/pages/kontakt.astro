@@ -1,0 +1,85 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import KontaktFormular from '@/components/KontaktFormular.astro';
+---
+
+<BaseLayout
+  title="Kontakt — Himalaya-Haus e.V."
+  description="Fragen zu Spende, Patenschaft oder Medical Camp? Schreiben Sie uns. Lama Konchok Samten oder Oliver antworten persönlich."
+>
+  <Hero
+    variant="compact"
+    title="Wir antworten persönlich."
+    subtitle="Kontakt"
+    description="Keine Hotline. Keine automatischen Antworten. Lama Samten oder Oliver lesen Ihre Nachricht."
+  />
+
+  <section class="section-padding bg-brand-creme">
+    <div class="container-content">
+      <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <span class="mx-2">/</span>
+        <span class="text-brand-text">Kontakt</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div>
+          <h2 class="font-serif text-h2 text-brand-text mb-6">Schreiben Sie uns</h2>
+          <KontaktFormular />
+        </div>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="font-serif text-h3 text-brand-text mb-4">Direkter Kontakt</h3>
+            <div class="space-y-4">
+              <div class="card p-5">
+                <div class="w-12 h-12 rounded-full bg-gradient-cta flex items-center justify-center mb-3">
+                  <span class="font-serif text-white text-h4">LS</span>
+                </div>
+                <h4 class="font-serif text-h4 text-brand-text mb-1">Lama Konchok Samten</h4>
+                <p class="text-caption text-brand-ocker font-semibold mb-2">Mitgründer & Vorstand — Projektverantwortung Ladakh</p>
+                <p class="text-small text-brand-text/70">
+                  Für Fragen zu Patenschaften, zum Baufortschritt der Nalanda Schule und zu Medical Camps.
+                  Lama Samten ist für gewöhnlich in Ladakh oder Frankfurt und antwortet in der Regel innerhalb von zwei Werktagen.
+                </p>
+              </div>
+
+              <div class="card p-5">
+                <div class="w-12 h-12 rounded-full bg-brand-creme-dark flex items-center justify-center mb-3">
+                  <span class="font-serif text-brand-text text-h4">OL</span>
+                </div>
+                <h4 class="font-serif text-h4 text-brand-text mb-1">Oliver</h4>
+                <p class="text-caption text-brand-ocker font-semibold mb-2">Mitgründer & Vorstand — Organisation & Verwaltung</p>
+                <p class="text-small text-brand-text/70">
+                  Für Fragen zu Spendenquittungen, Vereinsmitgliedschaft, Kooperationen und alles Organisatorische.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h4 class="font-serif text-h4 text-brand-text mb-3">Postanschrift</h4>
+            <address class="not-italic text-small text-brand-text/70 space-y-1">
+              <div class="font-semibold text-brand-text">Himalaya-Haus e.V.</div>
+              <div>Frankfurt am Main</div>
+              <div>Deutschland</div>
+            </address>
+            <p class="text-caption text-brand-text/50 mt-3">
+              Vollständige Adresse auf Anfrage per Kontaktformular
+            </p>
+          </div>
+
+          <div class="p-5 rounded-card bg-brand-creme-dark">
+            <h4 class="font-serif text-h4 text-brand-text mb-2">Reaktionszeit</h4>
+            <p class="text-small text-brand-text/70">
+              Wir antworten normalerweise innerhalb von zwei Werktagen.
+              Wenn Lama Samten gerade in Ladakh ist, kann es bei internationalen Verbindungen
+              etwas länger dauern.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
