@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import KontaktFormular from '@/components/KontaktFormular.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -18,7 +19,7 @@ import KontaktFormular from '@/components/KontaktFormular.astro';
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Kontakt</span>
       </nav>

@@ -4,6 +4,7 @@ import Hero from '@/components/Hero.astro';
 import BlogPostKarte from '@/components/BlogPostKarte.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
 import { getCollection } from 'astro:content';
+import { url } from '@/utils/url';
 
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -33,7 +34,7 @@ const categoryLabels: Record<string, string> = {
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Blog</span>
       </nav>
@@ -46,7 +47,7 @@ const categoryLabels: Record<string, string> = {
               description={post.data.description}
               pubDate={post.data.pubDate}
               author={post.data.author}
-              href={`/blog/${post.slug}/`}
+              href={url(`/blog/${post.slug}/`)}
               category={post.data.category}
               heroImage={post.data.heroImage}
               heroImageAlt={post.data.heroImageAlt}

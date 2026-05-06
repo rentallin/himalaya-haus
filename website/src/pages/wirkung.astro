@@ -4,6 +4,7 @@ import Hero from '@/components/Hero.astro';
 import ImpactZahlen from '@/components/ImpactZahlen.astro';
 import WirkungsRechner from '@/components/WirkungsRechner.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -22,7 +23,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Wirkung</span>
       </nav>

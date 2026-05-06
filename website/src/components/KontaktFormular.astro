@@ -1,4 +1,5 @@
 ---
+import { url } from '@/utils/url';
 const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID || '';
 const isPlaceholder = !formspreeId || formspreeId === 'PLACEHOLDER';
 ---
@@ -94,7 +95,7 @@ const isPlaceholder = !formspreeId || formspreeId === 'PLACEHOLDER';
         class="mt-0.5 flex-shrink-0 w-4 h-4 rounded border-brand-creme-dark text-brand-ocker focus:ring-brand-ocker"
       />
       <label for="contact-dsgvo" class="text-small text-brand-text/70">
-        Ich habe die <a href="/datenschutz/" class="text-brand-ocker hover:underline">Datenschutzerklärung</a> gelesen
+        Ich habe die <a href={url('/datenschutz/')} class="text-brand-ocker hover:underline">Datenschutzerklärung</a> gelesen
         und bin mit der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage einverstanden. <span class="text-brand-rot">*</span>
       </label>
     </div>

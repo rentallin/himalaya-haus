@@ -1,4 +1,5 @@
 ---
+import { url } from '@/utils/url';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -8,7 +9,7 @@ const currentYear = new Date().getFullYear();
 
       <!-- Spalte 1: Logo + Mission + Social -->
       <div>
-        <a href="/" class="flex items-center gap-3 group mb-4">
+        <a href={url('/')} class="flex items-center gap-3 group mb-4">
           <div class="w-10 h-10 rounded-full bg-gradient-cta flex items-center justify-center shadow-btn">
             <span class="text-white font-serif font-bold text-body-lg leading-none">H</span>
           </div>
@@ -53,11 +54,11 @@ const currentYear = new Date().getFullYear();
         <h3 class="font-serif text-h4 text-white mb-4">Organisation</h3>
         <ul class="space-y-2">
           {[
-            { label: 'Über den Verein', href: '/ueber-uns/' },
-            { label: 'Lama Konchok Samten', href: '/ueber-uns/lama-konchok/' },
-            { label: 'Jahresberichte', href: '/ueber-uns/vorstand/' },
-            { label: 'Wirkung in Zahlen', href: '/wirkung/' },
-            { label: 'Blog & Aktuelles', href: '/blog/' },
+            { label: 'Über den Verein', href: url('/ueber-uns/') },
+            { label: 'Lama Konchok Samten', href: url('/ueber-uns/lama-konchok/') },
+            { label: 'Jahresberichte', href: url('/ueber-uns/vorstand/') },
+            { label: 'Wirkung in Zahlen', href: url('/wirkung/') },
+            { label: 'Blog & Aktuelles', href: url('/blog/') },
           ].map(link => (
             <li>
               <a href={link.href} class="text-small text-white/70 hover:text-brand-ocker-light transition-colors duration-150">
@@ -73,12 +74,12 @@ const currentYear = new Date().getFullYear();
         <h3 class="font-serif text-h4 text-white mb-4">Mitmachen</h3>
         <ul class="space-y-2">
           {[
-            { label: 'Jetzt spenden', href: '/unterstuetzen/spenden/' },
-            { label: 'Patenschaft übernehmen', href: '/unterstuetzen/patenschaft/' },
-            { label: 'Nalanda Schule', href: '/projekte/nalanda-schule/' },
-            { label: 'Medical Camp', href: '/projekte/medical-camp/' },
-            { label: 'Newsletter', href: '/newsletter/' },
-            { label: 'Kontakt', href: '/kontakt/' },
+            { label: 'Jetzt spenden', href: url('/unterstuetzen/spenden/') },
+            { label: 'Patenschaft übernehmen', href: url('/unterstuetzen/patenschaft/') },
+            { label: 'Nalanda Schule', href: url('/projekte/nalanda-schule/') },
+            { label: 'Medical Camp', href: url('/projekte/medical-camp/') },
+            { label: 'Newsletter', href: url('/newsletter/') },
+            { label: 'Kontakt', href: url('/kontakt/') },
           ].map(link => (
             <li>
               <a href={link.href} class="text-small text-white/70 hover:text-brand-ocker-light transition-colors duration-150">
@@ -113,8 +114,8 @@ const currentYear = new Date().getFullYear();
       </p>
       <nav class="flex flex-wrap gap-4 justify-center" aria-label="Rechtliche Links">
         {[
-          { label: 'Impressum', href: '/impressum/' },
-          { label: 'Datenschutz', href: '/datenschutz/' },
+          { label: 'Impressum', href: url('/impressum/') },
+          { label: 'Datenschutz', href: url('/datenschutz/') },
         ].map(link => (
           <a href={link.href} class="text-caption text-white/40 hover:text-white/70 transition-colors">
             {link.label}

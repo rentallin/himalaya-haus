@@ -1,4 +1,6 @@
 ---
+import { url } from '@/utils/url';
+
 interface Props {
   variant?: 'inline' | 'fullpage';
   title?: string;
@@ -68,7 +70,7 @@ const isPlaceholder = !brevoFormUrl || brevoFormUrl.includes('PLACEHOLDER');
               />
               <label for="newsletter-consent" class="text-caption text-brand-text/60">
                 Ich möchte den Newsletter von Himalaya-Haus e.V. erhalten und akzeptiere die
-                <a href="/datenschutz/" class="text-brand-ocker hover:underline">Datenschutzerklärung</a>.
+                <a href={url('/datenschutz/')} class="text-brand-ocker hover:underline">Datenschutzerklärung</a>.
                 Abmeldung jederzeit per Link im Newsletter.
               </label>
             </div>
@@ -113,7 +115,7 @@ const isPlaceholder = !brevoFormUrl || brevoFormUrl.includes('PLACEHOLDER');
             class="mt-0.5 flex-shrink-0 w-4 h-4 rounded border-brand-creme-dark text-brand-ocker focus:ring-brand-ocker" />
           <label for="nl-consent" class="text-small text-brand-text/70">
             Ich möchte den Newsletter von Himalaya-Haus e.V. erhalten und akzeptiere die
-            <a href="/datenschutz/" class="text-brand-ocker hover:underline">Datenschutzerklärung</a>.
+            <a href={url('/datenschutz/')} class="text-brand-ocker hover:underline">Datenschutzerklärung</a>.
             Abmeldung jederzeit möglich.
           </label>
         </div>

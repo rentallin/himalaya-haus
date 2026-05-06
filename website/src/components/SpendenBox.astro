@@ -1,4 +1,6 @@
 ---
+import { url } from '@/utils/url';
+
 interface Props {
   variant?: 'fullwidth' | 'sidebar' | 'minimal';
   title?: string;
@@ -26,7 +28,7 @@ const isPlaceholder = stripeLinks.spende25.includes('nicht-konfiguriert');
   <div class="p-6 rounded-card bg-gradient-cta text-white">
     <h3 class="font-serif text-h4 mb-2">{title}</h3>
     <p class="text-small text-white/80 mb-4">{description}</p>
-    <a href="/unterstuetzen/spenden/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-brand-erde font-semibold text-small transition-all hover:bg-brand-creme hover:scale-105">
+    <a href={url('/unterstuetzen/spenden/')} class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-brand-erde font-semibold text-small transition-all hover:bg-brand-creme hover:scale-105">
       Jetzt spenden →
     </a>
   </div>
@@ -136,7 +138,7 @@ const isPlaceholder = stripeLinks.spende25.includes('nicht-konfiguriert');
       <div class="max-w-lg mx-auto mt-8 pt-8 border-t border-white/20 text-center">
         <p class="text-small text-white/70">
           Lieber per Überweisung?
-          <a href="/unterstuetzen/spenden/#bankverbindung" class="text-white underline hover:no-underline ml-1">Bankdaten anzeigen</a>
+          <a href={url('/unterstuetzen/spenden/#bankverbindung')} class="text-white underline hover:no-underline ml-1">Bankdaten anzeigen</a>
         </p>
       </div>
     </div>

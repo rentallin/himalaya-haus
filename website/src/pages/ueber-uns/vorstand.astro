@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -18,9 +19,9 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
-        <a href="/ueber-uns/" class="hover:text-brand-ocker">Über uns</a>
+        <a href={url('/ueber-uns/')} class="hover:text-brand-ocker">Über uns</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Vorstand</span>
       </nav>
@@ -32,7 +33,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
             <div class="w-20 h-20 rounded-full bg-gradient-cta flex items-center justify-center flex-shrink-0">
               <span class="font-serif text-white text-h2">LS</span>
             </div>
-            <a href="/ueber-uns/lama-konchok/" class="btn-ghost text-small text-center">Mehr erfahren →</a>
+            <a href={url('/ueber-uns/lama-konchok/')} class="btn-ghost text-small text-center">Mehr erfahren →</a>
           </div>
           <div>
             <h2 class="font-serif text-h2 text-brand-text mb-1">Lama Konchok Samten</h2>

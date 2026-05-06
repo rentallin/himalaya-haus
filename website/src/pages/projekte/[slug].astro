@@ -5,6 +5,7 @@ import BaufortschrittTimeline from '@/components/BaufortschrittTimeline.astro';
 import SpendenBox from '@/components/SpendenBox.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { url } from '@/utils/url';
 
 export async function getStaticPaths() {
   const projekte = await getCollection('projekte');
@@ -40,9 +41,9 @@ const isNalanda = projekt.slug === 'nalanda-schule';
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
-        <a href="/projekte/" class="hover:text-brand-ocker">Projekte</a>
+        <a href={url('/projekte/')} class="hover:text-brand-ocker">Projekte</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">{projekt.data.title}</span>
       </nav>

@@ -1,29 +1,32 @@
 ---
+import { url } from '@/utils/url';
+
 const navItems = [
   {
     label: 'Über uns',
-    href: '/ueber-uns/',
+    href: url('/ueber-uns/'),
     children: [
-      { label: 'Der Verein', href: '/ueber-uns/' },
-      { label: 'Lama Konchok Samten', href: '/ueber-uns/lama-konchok/' },
-      { label: 'Jahresberichte', href: '/ueber-uns/vorstand/' },
+      { label: 'Der Verein', href: url('/ueber-uns/') },
+      { label: 'Lama Konchok Samten', href: url('/ueber-uns/lama-konchok/') },
+      { label: 'Jahresberichte', href: url('/ueber-uns/vorstand/') },
     ],
   },
   {
     label: 'Projekte',
-    href: '/projekte/',
+    href: url('/projekte/'),
     children: [
-      { label: 'Nalanda Schule & Waisenhaus', href: '/projekte/nalanda-schule/' },
-      { label: 'Patenschaft', href: '/projekte/patenschaft/' },
-      { label: 'Medical Camp', href: '/projekte/medical-camp/' },
+      { label: 'Nalanda Schule & Waisenhaus', href: url('/projekte/nalanda-schule/') },
+      { label: 'Patenschaft', href: url('/projekte/patenschaft/') },
+      { label: 'Medical Camp', href: url('/projekte/medical-camp/') },
     ],
   },
-  { label: 'Blog', href: '/blog/' },
-  { label: 'Wirkung', href: '/wirkung/' },
+  { label: 'Blog', href: url('/blog/') },
+  { label: 'Wirkung', href: url('/wirkung/') },
 ];
 
 const currentPath = Astro.url.pathname;
-const isActive = (href: string) => currentPath === href || currentPath.startsWith(href) && href !== '/';
+const homeUrl = url('/');
+const isActive = (href: string) => currentPath === href || (currentPath.startsWith(href) && href !== homeUrl);
 ---
 
 <header
@@ -36,7 +39,7 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
     <div class="flex items-center justify-between h-20">
 
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group flex-shrink-0">
+      <a href={url('/')} class="flex items-center gap-3 group flex-shrink-0">
         <div class="w-10 h-10 rounded-full bg-gradient-cta flex items-center justify-center shadow-btn transition-transform duration-200 group-hover:scale-105">
           <span class="text-white font-serif font-bold text-body-lg leading-none">H</span>
         </div>
@@ -99,7 +102,7 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
           </div>
         ))}
 
-        <a href="/unterstuetzen/spenden/" class="btn-primary ml-4">
+        <a href={url('/unterstuetzen/spenden/')} class="btn-primary ml-4">
           Jetzt spenden
         </a>
       </div>
@@ -176,10 +179,10 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
 
       <!-- Mobile Spenden-Button (fixiert unten) -->
       <div class="pt-6 border-t border-brand-creme-dark">
-        <a href="/unterstuetzen/spenden/" @click="mobileOpen = false" class="btn-primary w-full justify-center text-center">
+        <a href={url('/unterstuetzen/spenden/')} @click="mobileOpen = false" class="btn-primary w-full justify-center text-center">
           Jetzt spenden
         </a>
-        <a href="/unterstuetzen/patenschaft/" @click="mobileOpen = false" class="btn-secondary w-full justify-center text-center mt-3">
+        <a href={url('/unterstuetzen/patenschaft/')} @click="mobileOpen = false" class="btn-secondary w-full justify-center text-center mt-3">
           Patenschaft übernehmen
         </a>
       </div>

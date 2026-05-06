@@ -1,4 +1,6 @@
 ---
+import { url } from '@/utils/url';
+
 interface Phase {
   nummer: number;
   titel: string;
@@ -59,7 +61,7 @@ const statusConfig = {
     <div class="container-content">
       <div class="flex items-center justify-between mb-8">
         <h2 class="font-serif text-h2 text-brand-text">Baufortschritt Nalanda Schule</h2>
-        <a href="/projekte/nalanda-schule/" class="btn-ghost hidden sm:flex">Alle Details →</a>
+        <a href={url('/projekte/nalanda-schule/')} class="btn-ghost hidden sm:flex">Alle Details →</a>
       </div>
       <div class="flex gap-0 overflow-x-auto pb-2">
         {phasen.map((phase, i) => {
@@ -84,7 +86,7 @@ const statusConfig = {
         })}
       </div>
       <div class="mt-6 text-center sm:hidden">
-        <a href="/projekte/nalanda-schule/" class="btn-ghost">Alle Details →</a>
+        <a href={url('/projekte/nalanda-schule/')} class="btn-ghost">Alle Details →</a>
       </div>
     </div>
   </section>

@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import SpendenBox from '@/components/SpendenBox.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -19,7 +20,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Unterstützen</span>
       </nav>
@@ -32,7 +33,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
             titel: 'Einmalspende',
             beschreibung: 'Unterstützen Sie gezielt ein Projekt mit einem Betrag Ihrer Wahl. Ab 25€ direkte Wirkung.',
             cta: 'Jetzt spenden',
-            href: '/unterstuetzen/spenden/',
+            href: url('/unterstuetzen/spenden/'),
             highlight: false,
           },
           {
@@ -40,7 +41,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
             titel: 'Dauerspende',
             beschreibung: 'Monatliche Unterstützung. Verlässliche Grundlage für laufende Projekte. Jederzeit kündbar.',
             cta: 'Dauerspende einrichten',
-            href: '/unterstuetzen/spenden/',
+            href: url('/unterstuetzen/spenden/'),
             highlight: false,
           },
           {
@@ -48,7 +49,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
             titel: 'Kinderpatenschaft',
             beschreibung: '35€ pro Monat. Ein konkretes Kind. Sie wissen, wen Ihre Unterstützung erreicht.',
             cta: 'Patenschaft starten',
-            href: '/unterstuetzen/patenschaft/',
+            href: url('/unterstuetzen/patenschaft/'),
             highlight: true,
           },
         ].map(option => (

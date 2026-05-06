@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -40,8 +41,8 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/" class="btn-primary">Zur Startseite</a>
-        <a href="/projekte/" class="btn-secondary">Projekte ansehen</a>
+        <a href={url('/')} class="btn-primary">Zur Startseite</a>
+        <a href={url('/projekte/')} class="btn-secondary">Projekte ansehen</a>
       </div>
     </div>
   </section>

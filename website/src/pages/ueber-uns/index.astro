@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -14,7 +15,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Über uns</span>
       </nav>
@@ -47,7 +48,7 @@ import NewsletterFormular from '@/components/NewsletterFormular.astro';
                 name: 'Lama Konchok Samten',
                 rolle: 'Mitgründer & Vorstand',
                 beschreibung: 'Buddhistischer Mönch der Drikung-Kagyü-Tradition. Geboren 1981 in Ladakh. Herzstück des Vereins und Verbindung zu allen Projekten vor Ort.',
-                href: '/ueber-uns/lama-konchok/',
+                href: url('/ueber-uns/lama-konchok/'),
               },
               {
                 name: 'Oliver',

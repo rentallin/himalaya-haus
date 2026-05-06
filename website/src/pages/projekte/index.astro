@@ -4,6 +4,7 @@ import Hero from '@/components/Hero.astro';
 import ProjektKarte from '@/components/ProjektKarte.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
 import { getCollection } from 'astro:content';
+import { url } from '@/utils/url';
 
 const projekte = (await getCollection('projekte'))
   .sort((a, b) => a.data.order - b.data.order);
@@ -23,7 +24,7 @@ const projekte = (await getCollection('projekte'))
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Projekte</span>
       </nav>
@@ -34,7 +35,7 @@ const projekte = (await getCollection('projekte'))
             <ProjektKarte
               title={projekt.data.title}
               description={projekt.data.description}
-              href={`/projekte/${projekt.slug}/`}
+              href={url(`/projekte/${projekt.slug}/`)}
               status={projekt.data.status}
               image={projekt.data.heroImage}
               imageAlt={projekt.data.heroImageAlt}
@@ -48,7 +49,7 @@ const projekte = (await getCollection('projekte'))
           <ProjektKarte
             title="Nalanda Schule & Waisenhaus"
             description="Internat für 200 Kinder in Saboo bei Leh. Ökologisch gebaut nach Passivhaus-Prinzip. Seit 2019 im Bau."
-            href="/projekte/nalanda-schule/"
+            href={url('/projekte/nalanda-schule/')}
             status="im-bau"
             label="Saboo bei Leh, Ladakh"
             variant="vertikal"
@@ -56,7 +57,7 @@ const projekte = (await getCollection('projekte'))
           <ProjektKarte
             title="Kinderpatenschaft"
             description="Monatliche Direktunterstützung für ein konkretes Kind — Schule, Unterkunft, Mahlzeiten."
-            href="/projekte/patenschaft/"
+            href={url('/projekte/patenschaft/')}
             status="aktiv"
             label="Ladakh, Indien"
             variant="vertikal"
@@ -64,7 +65,7 @@ const projekte = (await getCollection('projekte'))
           <ProjektKarte
             title="Medical Camp"
             description="Jährliche medizinische Camps mit deutschen Ärzten in Dörfern ohne Gesundheitsversorgung."
-            href="/projekte/medical-camp/"
+            href={url('/projekte/medical-camp/')}
             status="aktiv"
             label="Mobile Camps, Ladakh"
             variant="vertikal"

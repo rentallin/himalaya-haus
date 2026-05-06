@@ -4,7 +4,8 @@ import Hero from '@/components/Hero.astro';
 import KontaktFormular from '@/components/KontaktFormular.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
 
-const stripeLink = import.meta.env.PUBLIC_STRIPE_LINK_PATENSCHAFT || '/unterstuetzen/spenden/';
+import { url } from '@/utils/url';
+const stripeLink = import.meta.env.PUBLIC_STRIPE_LINK_PATENSCHAFT || url('/unterstuetzen/spenden/');
 ---
 
 <BaseLayout
@@ -22,9 +23,9 @@ const stripeLink = import.meta.env.PUBLIC_STRIPE_LINK_PATENSCHAFT || '/unterstue
   <section class="section-padding bg-brand-creme">
     <div class="container-content">
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
-        <a href="/unterstuetzen/" class="hover:text-brand-ocker">Unterstützen</a>
+        <a href={url('/unterstuetzen/')} class="hover:text-brand-ocker">Unterstützen</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Patenschaft</span>
       </nav>

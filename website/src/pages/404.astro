@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -15,8 +16,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
         Vielleicht finden Sie, was Sie suchen, über die Navigation.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/" class="btn-primary">Zur Startseite</a>
-        <a href="/projekte/" class="btn-secondary">Unsere Projekte</a>
+        <a href={url('/')} class="btn-primary">Zur Startseite</a>
+        <a href={url('/projekte/')} class="btn-secondary">Unsere Projekte</a>
       </div>
     </div>
   </section>

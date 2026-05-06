@@ -10,6 +10,7 @@ import QuoteBlock from '@/components/QuoteBlock.astro';
 import BlogPostKarte from '@/components/BlogPostKarte.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
 import { getCollection } from 'astro:content';
+import { url } from '@/utils/url';
 
 const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -25,8 +26,8 @@ const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
     variant="fullscreen"
     title="Ein Mönch aus Ladakh. Ein Verein aus Frankfurt. Eine Schule, die gerade gebaut wird."
     description="Himalaya-Haus e.V. verbindet zwei Welten — nicht symbolisch, sondern praktisch. Lama Konchok Samten lebt die Hälfte des Jahres in Frankfurt, die andere in Ladakh. Er kennt beide Seiten. Deshalb weiß er, was wirklich gebraucht wird."
-    ctaPrimary={{ label: 'Jetzt unterstützen', href: '/unterstuetzen/spenden/' }}
-    ctaSecondary={{ label: 'Unsere Projekte', href: '/projekte/' }}
+    ctaPrimary={{ label: 'Jetzt unterstützen', href: url('/unterstuetzen/spenden/') }}
+    ctaSecondary={{ label: 'Unsere Projekte', href: url('/projekte/') }}
     badge="Bau in Saboo läuft — Phase 3 aktiv"
   />
 
@@ -46,21 +47,21 @@ const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
         <ProjektKarte
           title="Nalanda Schule & Waisenhaus"
           description="In Saboo bei Leh entsteht ein Internat für 200 Kinder — Waisen und Kinder aus Dörfern ohne Schulzugang. Ökologisch gebaut. Gerade im Bau."
-          href="/projekte/nalanda-schule/"
+          href={url('/projekte/nalanda-schule/')}
           status="im-bau"
           label="Hauptprojekt · Saboo, Ladakh"
         />
         <ProjektKarte
           title="Kinderpatenschaft"
           description="Eine monatliche Patenschaft unterstützt ein konkretes Kind — in einer Klosterschule, einem Waisenhaus oder einer Dorfgemeinschaft."
-          href="/projekte/patenschaft/"
+          href={url('/projekte/patenschaft/')}
           status="aktiv"
           label="Laufend · Direkthilfe"
         />
         <ProjektKarte
           title="Medical Camp"
           description="Einmal im Jahr reisen Ärzte aus Deutschland nach Ladakh. Über 1.000 Patienten behandelt. Kostenlos. In Dörfern ohne nächste Arztpraxis."
-          href="/projekte/medical-camp/"
+          href={url('/projekte/medical-camp/')}
           status="aktiv"
           label="Jährlich · Mobile Versorgung"
         />
@@ -90,7 +91,7 @@ const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
           <p class="text-body text-brand-text/70 leading-relaxed mb-8">
             Diese Verbindung ist kein Zufall. Sie ist der Grund, warum die Projekte von Himalaya-Haus e.V. funktionieren.
           </p>
-          <a href="/ueber-uns/lama-konchok/" class="btn-primary">
+          <a href={url('/ueber-uns/lama-konchok/')} class="btn-primary">
             Lama Samten kennenlernen
           </a>
         </div>
@@ -140,14 +141,14 @@ const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
             <h2 class="font-serif text-h2 text-brand-text">Aus Saboo und Frankfurt</h2>
             <p class="text-body text-brand-text/60 mt-1">Berichte, die ankommen.</p>
           </div>
-          <a href="/blog/" class="btn-ghost hidden sm:flex">Alle Artikel →</a>
+          <a href={url('/blog/')} class="btn-ghost hidden sm:flex">Alle Artikel →</a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {latestPosts.map(post => (
             <BlogPostKarte
               title={post.data.title}
               description={post.data.description}
-              href={`/blog/${post.slug}/`}
+              href={url(`/blog/${post.slug}/`)}
               pubDate={post.data.pubDate}
               author={post.data.author}
               category={post.data.category}
@@ -157,7 +158,7 @@ const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
           ))}
         </div>
         <div class="text-center mt-8 sm:hidden">
-          <a href="/blog/" class="btn-ghost">Alle Artikel →</a>
+          <a href={url('/blog/')} class="btn-ghost">Alle Artikel →</a>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import Hero from '@/components/Hero.astro';
 import QuoteBlock from '@/components/QuoteBlock.astro';
 import NewsletterFormular from '@/components/NewsletterFormular.astro';
 import SpendenBox from '@/components/SpendenBox.astro';
+import { url } from '@/utils/url';
 ---
 
 <BaseLayout
@@ -21,9 +22,9 @@ import SpendenBox from '@/components/SpendenBox.astro';
     <div class="container-content">
       <!-- Breadcrumb -->
       <nav class="text-small text-brand-text/50 mb-10" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker">Startseite</a>
         <span class="mx-2">/</span>
-        <a href="/ueber-uns/" class="hover:text-brand-ocker">Über uns</a>
+        <a href={url('/ueber-uns/')} class="hover:text-brand-ocker">Über uns</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">Lama Konchok Samten</span>
       </nav>

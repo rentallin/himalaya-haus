@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
+import { url } from '@/utils/url';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -69,9 +70,9 @@ const formatDate = (date: Date) =>
     <div class="container-content section-padding-sm">
       <!-- Breadcrumb -->
       <nav class="text-small text-gray-500 mb-6" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-ocker transition-colors">Startseite</a>
+        <a href={url('/')} class="hover:text-brand-ocker transition-colors">Startseite</a>
         <span class="mx-2">/</span>
-        <a href="/blog/" class="hover:text-brand-ocker transition-colors">Blog</a>
+        <a href={url('/blog/')} class="hover:text-brand-ocker transition-colors">Blog</a>
         <span class="mx-2">/</span>
         <span class="text-brand-text">{title}</span>
       </nav>
@@ -138,7 +139,7 @@ const formatDate = (date: Date) =>
                 Buddhistischer Mönch der Drikung-Kagyü-Tradition, geboren 1981 in Ladakh.
                 Mitgründer und Herzstück von Himalaya-Haus e.V.
               </p>
-              <a href="/ueber-uns/lama-konchok/" class="btn-ghost text-small">
+              <a href={url('/ueber-uns/lama-konchok/')} class="btn-ghost text-small">
                 Mehr über Lama Samten →
               </a>
             </div>
@@ -152,7 +153,7 @@ const formatDate = (date: Date) =>
         <p class="text-white/90 mb-6">
           Baufortschritte, Reiseberichte und Reflexionen von Lama Samten — ca. viermal pro Jahr.
         </p>
-        <a href="/newsletter/" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-erde font-semibold transition-all duration-200 hover:bg-brand-creme hover:scale-105">
+        <a href={url('/newsletter/')} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-erde font-semibold transition-all duration-200 hover:bg-brand-creme hover:scale-105">
           Newsletter abonnieren
         </a>
       </div>
